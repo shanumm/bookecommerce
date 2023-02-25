@@ -1,0 +1,36 @@
+.footerTop {
+  display: flex;
+  background: #e6f1fa;
+  height: 10vh;
+  justify-content: space-around;
+}
+.footerTop > div {
+  display: flex;
+  align-items: center;
+}
+.footerTop img {
+  height: 18px;
+  width: 18px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 40vh;
+  background-color: black;
+  color: white;
+}
+
+.footerLinks > div:nth-of-type(1) {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 1rem;
+}
+.footerLinks > div:nth-of-type(2) > div {
+  font-size: 16px;
+  color: gray;
+  margin-bottom: 0.2rem;
+}
