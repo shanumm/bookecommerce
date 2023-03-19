@@ -16,5 +16,14 @@ export const accountInfo = [
   { heading: "First name", placeholder: "John" },
   { heading: "Last Name", placeholder: "Watson" },
 ];
-
-
+export const shippingAddress = [
+  { heading: "Email Address", placeholder: "" },
+  { heading: "Password", placeholder: "" },
+  { heading: "Zip/Postal Code", placeholder: "" },
+  { heading: "First Name", placeholder: "" },
+  { heading: "Last Name", placeholder: "" },
+  { heading: "Company", placeholder: "" },
+  { heading: "Street Address", placeholder: "" },
+  { heading: "Country", placeholder: "" },
+  { heading: "State/Province", placeholder: "" },
+];

@@ -8,6 +8,7 @@ import Nav from "./modules/Nav";
 import SignUp from "./modules/SignUp";
 import Dashboard from "./modules/Dashboard";
 import Shop from "./modules/Shop";
+import Shipping from "./modules/Shipping";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/shop" element={<Shop />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/shipping" element={<Shipping />} />
         </Routes>
         <Footer />
       </div>
