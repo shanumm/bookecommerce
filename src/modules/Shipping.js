@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import InputField from "../components/InputField";
 import { shippingAddress } from "../inputConstant";
 import SummaryBox from "./summaryBox";
 import "../modules/Styles/shipping.css";
+
 export default function Shipping() {
+  const [newValue, setNewValue] = useState({});
+
+  const updatedValue = (input, value) => {
+    const name = input.toLowerCase();
+    if (name.includes("first")) {
+      setNewValue({ ...newValue, first: value });
+    } else if (name.includes("last")) {
+      setNewValue({ ...newValue, last: value });
+    } else {
+      setNewValue({ ...newValue, [name]: value });
+    }
+  };
+
   return (
     <div className="ShippingContainer">
       <div className="ShippingContentWrapper">
@@ -12,7 +26,7 @@ export default function Shipping() {
             Shipping Address
           </div>
           {shippingAddress.map((field) => (
-            <InputField data={field} />
+            <InputField updatedValue={updatedValue} data={field} />
           ))}
           <div
             className="ShippingContentContainerHeading"

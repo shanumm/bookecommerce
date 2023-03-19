@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Blogs from "./Blogs";
 import HeroBanner from "./HeroBanner";
 import HomePageBookSection from "./HomePageBookSection";
@@ -14,7 +15,9 @@ export default function Landing() {
       <SectionOne />
       <HomePageBookSection />
       <div className="loadMoreButton">
-        <button>Load More</button>
+        <button>
+          <Link to="/shop">Load More</Link>
+        </button>
       </div>
       <SectionTwo />
       <SectionThree />

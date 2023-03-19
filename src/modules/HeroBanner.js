@@ -2,6 +2,7 @@ import React from "react";
 import "./Styles/heroBanner.css";
 import AlloneImage from "../Images/AlloneImage.png";
 import EnglishImage from "../Images/EnglishImage.png";
+
 export default function HeroBanner() {
   return (
     <div className="heroBanner">

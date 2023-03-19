@@ -3,7 +3,11 @@ import "./Styles/sectionOne.css";
 
 const Card = ({ right }) => {
   return (
-    <div className={`sectionOneCard ${right ? "sectionOneCardRight": "sectionOneCardLeft"}`}>
+    <div
+      className={`sectionOneCard ${
+        right ? "sectionOneCardRight" : "sectionOneCardLeft"
+      }`}
+    >
       <div>
         <img
           src={

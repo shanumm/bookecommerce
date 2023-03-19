@@ -65,7 +65,7 @@ export default function SignIn() {
             disabled={password != "" && email != "" ? false : true}
             onClick={handleSignIn}
           >
-            {loader ? "Loading" : "Create Account"}
+            {loader ? "Loading" : "Sign In"}
           </button>
 
           <button>Back</button>
