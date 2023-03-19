@@ -42,6 +42,7 @@
   text-transform: uppercase;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .navLinks ul li:last-child img {

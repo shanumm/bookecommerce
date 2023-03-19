@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Styles/signup.css";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -49,26 +49,30 @@ export default function SignUp() {
         <div className="signUpContentContainer">
           <div>Personal Information</div>
           <div className="signupContentInput">
-            <div>
-              <div>First name</div>
-              <input
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
-                placeholder="John"
-                type="text"
-              />
-            </div>
-            <div>
-              <div>Last Name</div>
-              <input
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                }}
-                placeholder="Watson"
-                type="text"
-              />
-            </div>
+            {isSignin ? null : (
+              <div>
+                <div>First name</div>
+                <input
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                  }}
+                  placeholder="John"
+                  type="text"
+                />
+              </div>
+            )}
+            {isSignin ? null : (
+              <div>
+                <div>Last Name</div>
+                <input
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
+                  placeholder="Watson"
+                  type="text"
+                />
+              </div>
+            )}
             <div>
               <div>Email</div>
               <input

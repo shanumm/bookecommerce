@@ -4,17 +4,30 @@ import Book from "../components/Book";
 import "./Styles/dashboard.css";
 import { accountInfo, addressFields, contactInfo } from "../inputConstant";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
-export default function Dashboard() {
+export default function Dashboard({ route }) {
+  const location = useLocation();
   const [activeNav, setActiveNav] = useState(1);
   const [isUser, setIsUser] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [userData, setUserData] = useState(null);
+  const [newValue, setNewValue] = useState({});
   const navigation = useNavigate();
+
+  useEffect(() => {
+    if (location?.state?.setNav) {
+      setActiveNav(location.state.setNav);
+    }
+  }, []);
 
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        setUserEmail(user.email);
         setIsUser(true);
       } else {
         setIsUser(false);
@@ -22,6 +35,50 @@ export default function Dashboard() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    getData();
+  }, [userEmail]);
+
+  const getData = async () => {
+    if (userEmail.length) {
+      const docRef = doc(db, "users", userEmail);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserData(docSnap.data());
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
+  };
+
+  const updatedValue = (input, value) => {
+    const name = input.toLowerCase();
+    if (name.includes("first")) {
+      setNewValue({ ...newValue, first: value });
+    } else if (name.includes("last")) {
+      setNewValue({ ...newValue, last: value });
+    } else {
+      setNewValue({ ...newValue, [name]: value });
+    }
+  };
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
+
+  useEffect(() => {
+    setNewValue({});
+  }, [activeNav]);
+
+  const handleUpdateAccountInfo = () => {
+    console.log(newValue, userEmail);
+    if (newValue) {
+      const userD = doc(db, "users", userEmail);
+      setDoc(userD, newValue, { merge: true });
+    }
+  };
 
   return isUser ? (
     <div className="dashboardContainer">
@@ -72,8 +129,11 @@ export default function Dashboard() {
               </div>
               <div className="dashboardCard">
                 <div>Contact Information</div>
-                <div>Ram Sharma ExampeAdress@gmail.com</div>
-                <button>Edit</button>
+                <div>
+                  {userData &&
+                    `${userData?.first} ${userData?.last}, ${userData?.email}, ${userData["phone number"]}`}
+                </div>
+                <button onClick={() => setActiveNav(2)}>Edit</button>
               </div>
               <div className="dashboardContentContainerHeading">
                 Address Book
@@ -81,20 +141,49 @@ export default function Dashboard() {
               <div className="dashboardCardContainer">
                 <div className="dashboardCard">
                   <div>Default Billing Address</div>
-                  <div>You have not set a default billing address.</div>
-                  <button>Edit</button>
+                  {userData?.country.length === 0 ? (
+                    <div>You have not set a default billing address.</div>
+                  ) : (
+                    <div>
+                      {userData &&
+                        ` ${
+                          userData["street address"] &&
+                          userData["street address"]
+                        } 
+                          ${
+                            userData["state/province"] &&
+                            userData["state/province"]
+                          }
+                          ${userData["country"] && userData["country"]}
+                          
+                          `}
+                    </div>
+                  )}
+                  <button onClick={() => setActiveNav(3)}>Edit</button>
                 </div>
-                <div className="dashboardCard">
+                <div style={{ marginLeft: "10px" }} className="dashboardCard">
                   <div>Default Shipping Address</div>
-                  <div>You have not set a default shipping address.</div>
-                  <button>Edit</button>
+                  {userData?.country.length === 0 ? (
+                    <div>You have not set a default billing address.</div>
+                  ) : (
+                    <div>
+                      {userData &&
+                        ` ${
+                          userData["street address"] &&
+                          userData["street address"]
+                        } 
+                          ${
+                            userData["state/province"] &&
+                            userData["state/province"]
+                          }
+                          ${userData["country"] && userData["country"]}
+                          ${userData["company"] && userData["company"]}
+                          
+                          `}
+                    </div>
+                  )}
+                  <button onClick={() => setActiveNav(3)}>Edit</button>
                 </div>
-              </div>
-              <div
-                style={{ paddingLeft: "0px", marginTop: "20px" }}
-                className="dashboardButtons"
-              >
-                <button>Save Address</button>
               </div>
             </div>
           </div>
@@ -106,10 +195,24 @@ export default function Dashboard() {
                 Account Information
               </div>
               {accountInfo.map((field) => (
-                <InputField data={field} />
+                <InputField
+                  userData={userData}
+                  updatedValue={updatedValue}
+                  data={field}
+                />
               ))}
               <div style={{ paddingLeft: "0px" }} className="dashboardButtons">
-                <button>Save</button>
+                <button
+                  onClick={handleUpdateAccountInfo}
+                  className={
+                    newValue?.first?.length === 0 ||
+                    newValue?.last?.length === 0
+                      ? "disabled"
+                      : ""
+                  }
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>
@@ -121,7 +224,11 @@ export default function Dashboard() {
                 Contact Information
               </div>
               {contactInfo.map((field) => (
-                <InputField data={field} />
+                <InputField
+                  userData={userData}
+                  updatedValue={updatedValue}
+                  data={field}
+                />
               ))}
               <div
                 className="dashboardContentContainerHeading"
@@ -134,10 +241,14 @@ export default function Dashboard() {
                 Address
               </div>
               {addressFields.map((field) => (
-                <InputField data={field} />
+                <InputField
+                  userData={userData}
+                  updatedValue={updatedValue}
+                  data={field}
+                />
               ))}
               <div style={{ paddingLeft: "0px" }} className="dashboardButtons">
-                <button>Save</button>
+                <button onClick={handleUpdateAccountInfo}>Save</button>
               </div>
             </div>
           </div>
