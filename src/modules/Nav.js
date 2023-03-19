@@ -8,19 +8,21 @@ export default function Nav() {
   const navigation = useNavigate();
 
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      setIsUser(true);
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      setIsUser(false);
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setIsUser(true);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        setIsUser(false);
+      }
+    });
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)

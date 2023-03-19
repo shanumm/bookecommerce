@@ -18,7 +18,6 @@ function App() {
           <Route exact path="/" element={<Landing />} />
           <Route exact path="/book" element={<CartProduct />} />
           <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/signin" element={<SignUp />} />
           <Route exact path="/shop" element={<Shop />} />
           <Route exact path="/dashboard" element={<Dashboard />} />
         </Routes>
