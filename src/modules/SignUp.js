@@ -4,22 +4,28 @@ import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigation=useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
+  const [confirmpassword, setConfirmpassword] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const handleSignUp = () => {
+    setLoader(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        setLoader(false);
         addData();
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        setLoader(false);
       });
   };
 
@@ -30,7 +36,7 @@ export default function SignUp() {
         last: lastname,
         email: email,
       });
-      console.log("Document written with ID: ");
+      navigation("/")
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -85,12 +91,40 @@ export default function SignUp() {
             </div>
             <div>
               <div>Confirm Password</div>
-              <input placeholder="password" type="text" />
+              <input
+                onChange={(e) => {
+                  setConfirmpassword(e.target.value);
+                }}
+                placeholder="password"
+                type="text"
+              />
             </div>
           </div>
         </div>
         <div className="signupButtons">
-          <button onClick={handleSignUp}>Create Account</button>
+          <button
+            className={
+              password === confirmpassword &&
+              password != "" &&
+              email != "" &&
+              firstname != "" &&
+              lastname != ""
+                ? ""
+                : "disabled"
+            }
+            disabled={
+              password === confirmpassword &&
+              password != "" &&
+              email != "" &&
+              firstname != "" &&
+              lastname != ""
+                ? false
+                : true
+            }
+            onClick={handleSignUp}
+          >
+            {loader ? "Loading" : "Create Account"}
+          </button>
           <button>Back</button>
         </div>
       </div>

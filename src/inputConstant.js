@@ -16,3 +16,5 @@ export const accountInfo = [
   { heading: "First name", placeholder: "John" },
   { heading: "Last Name", placeholder: "Watson" },
 ];
+
+
