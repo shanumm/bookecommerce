@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import Book from "../components/Book";
 import "./Styles/dashboard.css";
 import { accountInfo, addressFields, contactInfo } from "../inputConstant";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [activeNav, setActiveNav] = useState(1);
-  return (
+  const [isUser, setIsUser] = useState(false);
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsUser(true);
+      } else {
+        setIsUser(false);
+        navigation("/");
+      }
+    });
+  }, []);
+
+  return isUser ? (
     <div className="dashboardContainer">
       <div className="dashboardContainerHeading">
         {activeNav === 1 && "My Dashboard"}
@@ -145,5 +162,5 @@ export default function Dashboard() {
         )}
       </div>
     </div>
-  );
+  ) : null;
 }
