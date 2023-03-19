@@ -1,13 +1,11 @@
 import React from "react";
 import "./Styles/sectionFour.css";
+import UrduImage from "../Images/UrduImage.png";
 export default function SectionFour() {
   return (
     <div className="sectionFour">
       <div>
-        <img
-          src="https://cdn.pixabay.com/photo/2017/08/06/22/01/books-2596809_960_720.jpg"
-          alt=""
-        />
+        <img src={UrduImage} />
       </div>
       <div>
         <div>Lorem ipsum dolor sit amet.</div>

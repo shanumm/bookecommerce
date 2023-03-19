@@ -77,3 +77,77 @@
   object-fit: cover;
   transform: translate(-40px, -40px);
 }
+
+@media (max-width: 1040px) {
+  .heroBannerBGImage {
+    opacity: .8;
+  }
+  .heroBanner {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .heroBanner > div {
+    height: 1rem !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .heroText {
+    height: 5vh !important;
+    width: 65% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .heroText > div {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center !important;
+    align-items: center;
+    width: 100% !important;
+    word-wrap: break-word !important;
+  }
+  .heroTextButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .heroTextButton button {
+    border: 3px solid black !important;
+  }
+  .heroText > div span {
+    font-size: 1.5rem;
+    word-wrap: break-word !important;
+  }
+  .heroBanner > div > div:nth-of-type(1) {
+    position: relative;
+  }
+
+  .heroBanner > div > div:nth-of-type(1)::before {
+    display: none;
+  }
+  .heroBanner > div > div:nth-of-type(1)::after {
+    display: none;
+  }
+  .heroBannerImageContainer img {
+    border-radius: 10px;
+    padding-left: 2rem;
+    box-shadow: rgba(66, 73, 80, 0.2) 0px 8px 24px;
+  }
+  .heroBannerImageContainer img:nth-of-type(1) {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+  }
+  .heroBannerImageContainer img:nth-of-type(2) {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    transform: translate(-40px, -40px);
+  }
+}

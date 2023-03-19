@@ -25,7 +25,7 @@ export default function HomePageBookSection() {
       </div>
       <div className="homePageBookSectionRight">
         {myArray.map((item, index) => (
-          <Book />
+          <Book index={index} />
         ))}
       </div>
     </div>

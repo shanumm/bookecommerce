@@ -1,0 +1,7 @@
+.shopContent {
+  display: flex;
+  margin: 0 32px;
+}
+.shopContent > .homePageBookSectionLeft {
+  border-right: 1px solid #c4c4c4;
+}/*# sourceMappingURL=shop.css.map */

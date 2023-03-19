@@ -1,15 +1,26 @@
 import React from "react";
-import "./Styles/nav.css"
+import "./Styles/nav.css";
+import { Link } from "react-router-dom";
+import NDLogo from "../Images/NDLogo.png";
 export default function Nav() {
   return (
     <div className="nav">
-      <div>Logo</div>
+      <div>
+        <img src={NDLogo} />
+      </div>
       <div className="navLinks">
         <ul>
-          <li>Home</li>
-          <li>Shop</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="shop">
+            <li>Shop</li>
+          </Link>
           <li>Blog</li>
           <li>Sale</li>
+          <Link to="dashboard">
+            <li>Dashboard</li>
+          </Link>
           <li>Contact Us</li>
           <li>
             <img
@@ -22,7 +33,9 @@ export default function Nav() {
       </div>
       <div className="navRightSide">
         <div>Sign In</div>
-        <div>Create An Account</div>
+        <div>
+          <Link to="signup">Create An Account</Link>
+        </div>
         <div>
           <div>
             <img

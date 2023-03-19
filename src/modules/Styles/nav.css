@@ -16,10 +16,10 @@
   display: flex;
 }
 .nav img {
-  width: 20px;
-  height: 20px;
-  filter: invert(1);
+  width: 24px;
+  height: 24px;
   object-fit: contain;
+  filter: invert(1);
 }
 
 .navLinks {

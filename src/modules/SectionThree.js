@@ -11,7 +11,7 @@ export default function SectionThree() {
         <div>
           {" "}
           {myArray.map((item, index) => (
-            <Book />
+            <Book index={index} />
           ))}
         </div>
       </div>
@@ -20,7 +20,7 @@ export default function SectionThree() {
         <div>
           {" "}
           {myArray.map((item, index) => (
-            <Book />
+            <Book index={index} />
           ))}
         </div>
       </div>
