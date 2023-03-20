@@ -26,7 +26,7 @@
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .cartProductSection1 > :nth-child(1) > :nth-child(2) {
   height: 10%;
@@ -166,7 +166,7 @@
   height: 1.5rem;
   width: 1.2rem;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .cartProductSection2 > :nth-child(1) > :nth-child(2) {
   height: 1.2px;
@@ -201,7 +201,8 @@
   font-weight: 100;
   font-size: 0.8rem;
 }
-.cartProductSection2 > :nth-child(2), .cartProductSection2 > :nth-child(3) {
+.cartProductSection2 > :nth-child(2),
+.cartProductSection2 > :nth-child(3) {
   height: 8vh;
   width: 100%;
   margin-top: 1rem;
@@ -212,11 +213,12 @@
   align-items: center;
   font-size: 0.6rem;
 }
-.cartProductSection2 > :nth-child(2) img, .cartProductSection2 > :nth-child(3) img {
+.cartProductSection2 > :nth-child(2) img,
+.cartProductSection2 > :nth-child(3) img {
   height: 1.5rem;
   width: 1.2rem;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .cartProductSection3 {
@@ -312,8 +314,23 @@
     height: auto;
     margin-bottom: 1rem;
   }
+  .cartProductSection1 > :nth-child(2) > :nth-child(6) {
+    width: 75%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(7) {
+    width: 75%;
+  }
   .cartProductSection1 > :nth-child(2) > :nth-child(8) {
     width: 100%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(8) > :nth-child(1) {
+    padding: 0rem 2rem;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(8) > :nth-child(2) {
+    padding: 0rem 3rem;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(9) {
+    width: 90%;
   }
   .cartProductSection2 {
     height: 60vh;
@@ -335,4 +352,27 @@
   .navRightSide > div:nth-of-type(3) > div {
     margin: 0 10px !important;
   }
-}/*# sourceMappingURL=cartProduct.css.map */
+} /*# sourceMappingURL=cartProduct.css.map */
+@media (max-width: 1180px) {
+  .cartProductSection1 > :nth-child(2) > :nth-child(2) {
+    width: auto;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(6) {
+    width: 75%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(7) {
+    width: 75%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(8) {
+    width: 100%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(8) > :nth-child(1) {
+    padding: 0rem 2rem;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(8) > :nth-child(2) {
+    padding: 0rem 3rem;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(9) {
+    width: 100%;
+  }
+}
