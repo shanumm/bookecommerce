@@ -13,6 +13,8 @@ import BookForm from "./components/BookForm/BookForm";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Shipping from "./modules/Shipping";
+import { CartProvider } from "./CartContext";
+import ShoppingCart from "./modules/ShoppingCart";
 
 function App() {
   const [isUser, setIsUser] = useState(false);
@@ -35,22 +37,26 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App">
-        <Nav />
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="/book" element={<CartProduct />} />
-          <Route exact path="/signup" element={<SignUp />} />
-          <Route exact path="/signin" element={<SignIn />} />
-          <Route exact path="/shop" element={<Shop />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
-          {isUser && <Route exact path="/addBook" element={<BookForm />} />}
-          <Route exact path="/shipping" element={<Shipping />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <div className="App">
+          <Nav />
+          <Routes>
+            <Route exact path="/" element={<Landing />} />
+            {/* <Route exact path="/book" element={<CartProduct />} /> */}
+            <Route exact path="/signup" element={<SignUp />} />
+            <Route exact path="/signin" element={<SignIn />} />
+            <Route exact path="/shop" element={<Shop />} />
+            <Route exact path="/cart" element={<ShoppingCart />} />
+            <Route exact path="/book/:id" element={<CartProduct />} />
+            <Route exact path="/dashboard" element={<Dashboard />} />
+            {isUser && <Route exact path="/addBook" element={<BookForm />} />}
+            <Route exact path="/shipping" element={<Shipping />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
 

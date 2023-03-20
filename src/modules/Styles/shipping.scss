@@ -122,3 +122,19 @@
     background-color: rgba(128, 128, 128, 0.392);
   }
 }
+
+@media (max-width: 769px) {
+  .ShippingContentWrapper {
+    flex-wrap: wrap-reverse;
+    & > div {
+      flex: 1 1 20rem;
+      padding: 0;
+    }
+  }
+  .Shippingsummary {
+    padding: 0 !important;
+  }
+  .summaryBox_container_items > div > :nth-child(1) > :nth-child(2) {
+    width: 80%;
+  }
+}

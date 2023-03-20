@@ -17,3 +17,47 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.allParent {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 767px) {
+  .sectionOne {
+    min-height: 80vh;
+    height: auto !important;
+    flex-wrap: wrap !important;
+  }
+  .sectionFour,
+  .blogs {
+    display: none !important;
+  }
+  .sectionOne > div {
+    flex: 1 1 20rem !important;
+  }
+  .allParent > div:nth-of-type(1) {
+    order: 1;
+  }
+  .allParent > div:nth-of-type(2) {
+    order: 3;
+  }
+  .allParent > div:nth-of-type(3) {
+    order: 2;
+  }
+  .allParent > div:nth-of-type(4) {
+    order: 4;
+  }
+  .allParent > div:nth-of-type(5) {
+    order: 5;
+  }
+  .allParent > div:nth-of-type(6) {
+    order: 6;
+  }
+  .allParent > div:nth-of-type(7) {
+    order: 7;
+  }
+  .allParent > div:nth-of-type(8) {
+    order: 8;
+  }
+}

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Book from "../components/Book";
 import "./Styles/shop.css";
 
 import SectionTwo from "./SectionTwo";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const Card = ({ right }) => {
   return (
@@ -34,7 +36,23 @@ const Card = ({ right }) => {
 };
 
 export default function Shop() {
-  const [myArray, setMyArray] = useState(new Array(8).fill(null));
+  const [bookData, setBookData] = useState([]);
+
+  useEffect(() => {
+    getBookData();
+  }, []);
+
+  const getBookData = async () => {
+    const books = [];
+    const querySnapshot = await getDocs(collection(db, "books"));
+    querySnapshot.forEach((doc) => {
+      books.push({ [doc.id]: doc.data() });
+      if (books.length === querySnapshot.size) {
+        setBookData(books);
+      }
+    });
+  };
+
   return (
     <div>
       <SectionTwo />
@@ -72,13 +90,23 @@ export default function Shop() {
           </div>
         </div>
         <div className="homePageBookSectionRight">
-          {myArray.map((item, index) => (
-            <Book index={index} />
-          ))}
+          {bookData.length > 0 &&
+            bookData.map((item, index) => (
+              <Book
+                book={Object.values(item)[0]}
+                index={index}
+                keys={Object.keys(item)[0]}
+              />
+            ))}
           <Card right={true} />
-          {myArray.map((item, index) => (
-            <Book index={index} />
-          ))}
+          {bookData.length > 0 &&
+            bookData.map((item, index) => (
+              <Book
+                book={Object.values(item)[0]}
+                index={index}
+                keys={Object.keys(item)[0]}
+              />
+            ))}
         </div>
       </div>
     </div>

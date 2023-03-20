@@ -81,6 +81,7 @@
   justify-content: space-between;
   font-size: 0.8rem;
   font-weight: 500;
+  align-items: center;
 }
 .cartProductSection1 > :nth-child(2) > :nth-child(6) {
   height: 1rem;
@@ -278,7 +279,7 @@
   height: 4%;
   width: 100%;
   font-size: 0.8rem;
-  color: #BDBDBD;
+  color: #bdbdbd;
 }
 .cartProductSection4-image > :nth-child(3) {
   height: 9%;
@@ -289,4 +290,49 @@
 .cartProductSection4-image > :nth-child(4) {
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+@media (max-width: 769px) {
+  .cartProductSection1 {
+    flex-wrap: wrap;
+    min-height: 60vh;
+    height: auto;
+  }
+  .cartProductSection1 > :nth-child(1) > :nth-child(1) {
+    width: 100%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(2) {
+    width: auto;
+  }
+  .cartProductSection1 > :nth-child(1) > :nth-child(2) {
+    margin: 10px 0;
+    width: 100%;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(5) {
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  .cartProductSection1 > :nth-child(2) > :nth-child(8) {
+    width: 100%;
+  }
+  .cartProductSection2 {
+    height: 60vh;
+    width: 90%;
+    margin: 1rem auto;
+  }
+  .cartProductSection2 > :nth-child(1) > :nth-child(3) > :nth-child(2) p {
+    height: auto;
+  }
+  .cartProductSection3 > :nth-child(1) {
+    width: 100%;
+  }
+  .cartProductSection4-image {
+    width: 40%;
+  }
+  .cartProductSection4 {
+    overflow-x: scroll;
+  }
+  .navRightSide > div:nth-of-type(3) > div {
+    margin: 0 10px !important;
+  }
 }/*# sourceMappingURL=cartProduct.css.map */

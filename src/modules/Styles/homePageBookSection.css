@@ -28,8 +28,24 @@
 .homePageBookSectionRight {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .homePageBookSectionRight > div {
   flex: 0 0 10rem;
+}
+
+@media (max-width: 767px) {
+  .book {
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 150px;
+    min-width: 150px;
+  }
+  .homePageBookSection {
+    margin: 2rem 10px;
+  }
+  .homePageBookSectionLeft {
+    display: none;
+  }
 }

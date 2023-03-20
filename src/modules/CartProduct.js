@@ -1,14 +1,82 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Styles/cartProduct.css";
 import EnglishImage from "../Images/EnglishImage.png";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
+import { useLocation, useNavigation } from "react-router-dom";
+import CartContext from "../CartContext";
 export default function CartProduct() {
+  const { addToCart } = useContext(CartContext);
+
+  const [count, setCount] = useState(1);
+
   const [myprice, setmyprice] = useState(new Array(5).fill(null));
+  const [bookData, setBookData] = useState({});
+  const [allbookData, setAllBookData] = useState([]);
+
+  const [selectedValue, setSelectedValue] = useState("");
+  const location = useLocation();
+
+  const handleRadioChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
+  useEffect(() => {
+    getBookData();
+  }, []);
+
+  const getBookData = async () => {
+    const books = [];
+    const querySnapshot = await getDocs(collection(db, "books"));
+    querySnapshot.forEach((doc) => {
+      books.push({ [doc.id]: doc.data() });
+      if (books.length === querySnapshot.size) {
+        setAllBookData(books);
+      }
+    });
+  };
+
+  const handleAddToCart = () => {
+    addToCart({ ...bookData, quantity: count, selectedValue: selectedValue });
+  };
+
+  useEffect(() => {
+    getBook();
+  }, []);
+
+  function handleIncrement() {
+    setCount(count + 1);
+  }
+
+  function handleDecrement() {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  }
+
+  const getBook = async () => {
+    const pathname = location.pathname;
+
+    const bookId = pathname.substring(pathname.lastIndexOf("/") + 1);
+
+    const docRef = doc(db, "books", bookId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      setBookData(docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  };
+
   return (
     <div className="CartProduct">
       <div className="cartProductSection1">
         <div>
           <div>
-            <img src={EnglishImage} />
+            <img src={bookData?.url} />
           </div>
           <div>
             <h4>SHARE: </h4>
@@ -19,11 +87,11 @@ export default function CartProduct() {
           </div>
         </div>
         <div>
-          <h4>Home/ Womens Dress/ Angels malu</h4>
-          <div>FENDI</div>
-          <h1>RAMAYANA</h1>
+          <h4>Home/ Book/ {bookData?.name}</h4>
+          <div>{bookData?.category?.toUpperCase()}</div>
+          <h1>{bookData?.name}</h1>
           <h5>SELECT COVER</h5>
-          <div>
+          {/* <div>
             <div>
               <input
                 type="checkbox"
@@ -42,6 +110,28 @@ export default function CartProduct() {
               />
               SOFT
             </div>
+          </div> */}
+          <div>
+            <label>
+              <input
+                onChange={handleRadioChange}
+                type="radio"
+                name="options"
+                checked={selectedValue === "Hard"}
+                value="Hard"
+              />
+              Hard
+            </label>
+            <label>
+              <input
+                onChange={handleRadioChange}
+                type="radio"
+                name="options"
+                checked={selectedValue === "Soft"}
+                value="Soft"
+              />
+              Soft
+            </label>
           </div>
           <div>
             <h3>QUANTITY</h3>
@@ -49,16 +139,20 @@ export default function CartProduct() {
           </div>
           <div>
             <div>
-              <h3>-</h3>
-              <h2>1</h2>
-              <h3>+</h3>
+              <h3 style={{ cursor: "pointer" }} onClick={handleDecrement}>
+                -
+              </h3>
+              <h2>{count}</h2>
+              <h3 style={{ cursor: "pointer" }} onClick={handleIncrement}>
+                +
+              </h3>
             </div>
             <div>
-              <h6>200.00 RS.</h6>
+              <h6>{bookData?.price} RS.</h6>
             </div>
           </div>
           <div>
-            <button>ADD TO BAG</button>
+            <button onClick={handleAddToCart}>ADD TO BAG</button>
             <button>♡ SAVE</button>
           </div>
           <div>
@@ -100,36 +194,32 @@ export default function CartProduct() {
           <h1>Other information</h1>
           <img src="https://img.icons8.com/ios/1x/plus-math.png" />
         </div>
-        <div>
+        {/* <div>
           <h1>Another tab</h1>
           <img src="https://img.icons8.com/ios/1x/plus-math.png" />
-        </div>
+        </div> */}
       </div>
       <div className="cartProductSection3">
         <div>
           <h3>You May Also Like</h3>
         </div>
-        <div>
-          <div>
-            <img src="https://img.icons8.com/ios-glyphs/1x/chevron-left.png" />
-          </div>
-          <div>
-            <img src="https://img.icons8.com/ios-glyphs/1x/chevron-right.png" />
-          </div>
-        </div>
       </div>
       <div className="cartProductSection4">
         {" "}
-        {myprice.map((item, index) => (
-          <div className="cartProductSection4-image">
-            <div>
-              <img src={EnglishImage} />
-            </div>
-            <div>TOP women</div>
-            <div>Angels malu zip jeans slim black used</div>
-            <div>139,00 EUR</div>
-          </div>
-        ))}
+        {allbookData.length &&
+          allbookData.map(
+            (item, index) =>
+              index < 5 && (
+                <div className="cartProductSection4-image">
+                  <div>
+                    <img src={Object.values(item)[0].url} />
+                  </div>
+                  <div>{Object.values(item)[0].category}</div>
+                  <div>{Object.values(item)[0].name}</div>
+                  <div>{Object.values(item)[0].price} RS.</div>
+                </div>
+              )
+          )}
       </div>
     </div>
   );

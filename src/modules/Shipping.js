@@ -1,11 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import { shippingAddress } from "../inputConstant";
 import SummaryBox from "./summaryBox";
 import "../modules/Styles/shipping.css";
+import CartContext from "../CartContext";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function Shipping() {
   const [newValue, setNewValue] = useState({});
+  const { items } = useContext(CartContext);
+
+  const [isUser, setIsUser] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        setUserEmail(user.email);
+        setIsUser(true);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        setIsUser(false);
+      }
+    });
+  }, []);
 
   const updatedValue = (input, value) => {
     const name = input.toLowerCase();
@@ -36,9 +60,11 @@ export default function Shipping() {
               marginTop: "32px",
             }}
           ></div>
-          <div style={{ paddingLeft: "0px" }} className="ShippingButtons">
-            <button>Login</button>
-          </div>
+          {!isUser && (
+            <div style={{ paddingLeft: "0px" }} className="ShippingButtons">
+              <button>Login</button>
+            </div>
+          )}
           <div className="ShippingContentContainerHeading">Shipping Method</div>
           <div className="shippingMethod">
             <div></div>
@@ -60,7 +86,7 @@ export default function Shipping() {
           </div>
         </div>
         <div className="Shippingsummary">
-          <SummaryBox />
+          <SummaryBox items={items} />
         </div>
       </div>
     </div>

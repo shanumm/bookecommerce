@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import "./Styles/nav.css";
 import { Link, useNavigate, useHistory } from "react-router-dom";
 import NDLogo from "../Images/NDLogo.png";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import CartContext from "../CartContext";
 export default function Nav() {
+  const { items } = useContext(CartContext);
   const [isUser, setIsUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [activeBurger, setActiveBurger] = useState(false);
   const navigation = useNavigate();
 
   const auth = getAuth();
@@ -40,11 +43,40 @@ export default function Nav() {
     navigation("/signin");
   };
 
+  const handleRedirect = (redirect) => {
+    setActiveBurger(false);
+    navigation(redirect);
+  };
+
   return (
     <div className="nav">
-      <div>
+      <div className="logoImg">
         <img src={NDLogo} />
       </div>
+      <div
+        onClick={() => {
+          setActiveBurger(!activeBurger);
+        }}
+        className="menu-btn__burger"
+      ></div>
+      <div className={activeBurger ? "activeBurger burgerNav" : "burgerNav"}>
+        <ul>
+          <li onClick={() => handleRedirect("/")}>Home</li>
+
+          <li onClick={() => handleRedirect("/shop")}>Shop</li>
+
+          <li>Blog</li>
+          <li>Sale</li>
+          {userEmail === "test2@gmail.com" && (
+            <li onClick={() => handleRedirect("/addbook")}>Add Book</li>
+          )}
+          {isUser && (
+            <li onClick={() => handleRedirect("/dashboard")}>Dashboard</li>
+          )}
+          <li>Contact Us</li>
+        </ul>
+      </div>
+
       <div className="navLinks">
         <ul>
           <Link to="/">
@@ -96,12 +128,18 @@ export default function Nav() {
               alt=""
             />
           </div>
-          <div>
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/2169/2169842.png"
-              alt=""
-            />
-          </div>
+          <Link
+            style={{ marginLeft: "5px" }}
+            to={items.length > 0 ? "/cart" : ""}
+          >
+            <div>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/2169/2169842.png"
+                alt=""
+              />
+              {items.length}
+            </div>
+          </Link>
         </div>
       </div>
     </div>

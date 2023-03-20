@@ -1,5 +1,7 @@
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { db } from "../firebase";
 import Blogs from "./Blogs";
 import HeroBanner from "./HeroBanner";
 import HomePageBookSection from "./HomePageBookSection";
@@ -9,18 +11,35 @@ import SectionThree from "./SectionThree";
 import SectionTwo from "./SectionTwo";
 
 export default function Landing() {
+  const [bookData, setBookData] = useState([]);
+
+  useEffect(() => {
+    getBookData();
+  }, []);
+
+  const getBookData = async () => {
+    const books = [];
+    const querySnapshot = await getDocs(collection(db, "books"));
+    querySnapshot.forEach((doc) => {
+      books.push({ [doc.id]: doc.data() });
+      if (books.length === querySnapshot.size) {
+        setBookData(books);
+      }
+    });
+  };
+
   return (
-    <div>
+    <div className="allParent">
       <HeroBanner />
       <SectionOne />
-      <HomePageBookSection />
+      <HomePageBookSection bookData={bookData} />
       <div className="loadMoreButton">
         <button>
           <Link to="/shop">Load More</Link>
         </button>
       </div>
       <SectionTwo />
-      <SectionThree />
+      <SectionThree bookData={bookData} />
       <SectionFour />
       <Blogs />
     </div>

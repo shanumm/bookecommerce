@@ -65,10 +65,7 @@ export default function Dashboard({ route }) {
   };
 
   useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
-  useEffect(() => {
+    console.log(activeNav);
     setNewValue({});
   }, [activeNav]);
 
@@ -82,9 +79,24 @@ export default function Dashboard({ route }) {
 
   return isUser ? (
     <div className="dashboardContainer">
+      <div className="burgerDashboardNav">
+        <div class="burgerDashboardNav">
+          <select
+            value={activeNav}
+            onChange={(e) => setActiveNav(e.target.value)}
+            id="dashboardSelect"
+          >
+            <option value="1">Account Dashboard</option>
+            <option value="2">Account Information</option>
+            <option value="3">Address Book</option>
+            <option value="4">My Orders</option>
+            <option value="5">My Wishlist</option>
+          </select>
+        </div>
+      </div>
       <div className="dashboardContainerHeading">
-        {activeNav === 1 && "My Dashboard"}
-        {activeNav === 3 && "Add New Address"}
+        {activeNav == 1 && "My Dashboard"}
+        {activeNav == 3 && "Add New Address"}
       </div>
       <div className="dashboardContentWrapper">
         <div className="dashboardNav">
@@ -121,7 +133,7 @@ export default function Dashboard({ route }) {
             </div>
           </div>
         </div>
-        {activeNav === 1 && (
+        {activeNav == 1 && (
           <div className="dashboardContent">
             <div className="dashboardContentContainer">
               <div className="dashboardContentContainerHeading">
@@ -188,7 +200,7 @@ export default function Dashboard({ route }) {
             </div>
           </div>
         )}
-        {activeNav === 2 && (
+        {activeNav == 2 && (
           <div className="dashboardContent">
             <div className="dashboardContentContainer">
               <div className="dashboardContentContainerHeading">
@@ -217,7 +229,7 @@ export default function Dashboard({ route }) {
             </div>
           </div>
         )}
-        {activeNav === 3 && (
+        {activeNav == 3 && (
           <div className="dashboardContent">
             <div className="dashboardContentContainer">
               <div className="dashboardContentContainerHeading">
@@ -253,7 +265,7 @@ export default function Dashboard({ route }) {
             </div>
           </div>
         )}
-        {activeNav === 5 && (
+        {activeNav == 5 && (
           <div className="myWishList">
             <div>
               <Book index={0} />

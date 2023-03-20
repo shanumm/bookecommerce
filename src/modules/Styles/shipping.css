@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0rem 0 2rem 0;
+  padding: 4rem 0 2rem 0;
 }
 
 .ShippingContainerHeading {
@@ -39,7 +39,7 @@
 }
 
 .ShippingContentContainer {
-  padding: 24px;
+  padding: 56px;
   width: 55%;
 }
 
@@ -132,4 +132,20 @@
   height: 0.5px;
   width: 100%;
   background-color: rgba(128, 128, 128, 0.392);
+}
+
+@media (max-width: 769px) {
+  .ShippingContentWrapper {
+    flex-wrap: wrap-reverse;
+  }
+  .ShippingContentWrapper > div {
+    flex: 1 1 20rem;
+    padding: 0;
+  }
+  .Shippingsummary {
+    padding: 0 !important;
+  }
+  .summaryBox_container_items > div > :nth-child(1) > :nth-child(2) {
+    width: 80%;
+  }
 }/*# sourceMappingURL=shipping.css.map */

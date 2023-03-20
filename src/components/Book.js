@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import "../modules/Styles/book.css";
 import AlloneImage from "../Images/AlloneImage.png";
 import Img1 from "../BookImgs/kindergarden/1.png";
@@ -9,15 +9,28 @@ import Img5 from "../BookImgs/kindergarden/5.png";
 import Img6 from "../BookImgs/kindergarden/6.png";
 import Img7 from "../BookImgs/kindergarden/7.png";
 import Img8 from "../BookImgs/kindergarden/8.png";
-export default function Book({ index }) {
-  const img = [Img1, Img2, Img3, Img4, Img5, Img6, Img7, Img8];
+import CartContext from "../CartContext";
+import { Link } from "react-router-dom";
+export default function Book({ index, book, keys }) {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    addToCart(book?.name, book?.price, book?.url);
+  };
+
   return (
-    <div className="book">
-      <div>
-        <img src={img[index]} />
+    <Link to={`/book/${keys}`}>
+      <div
+        style={{ cursor: "pointer" }}
+        // onClick={handleAddToCart}
+        className="book"
+      >
+        <div>
+          <img src={book?.url} />
+        </div>
+        <div>{book?.name}</div>
+        <div>{book?.price} Rs.</div>
       </div>
-      <div>Book Name</div>
-      <div>Price : </div>
-    </div>
+    </Link>
   );
 }

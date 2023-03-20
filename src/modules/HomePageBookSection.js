@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import Book from "../components/Book";
+import { db } from "../firebase";
 import "./Styles/homePageBookSection.css";
-export default function HomePageBookSection() {
-  const [myArray, setMyArray] = useState(new Array(8).fill(null));
-
+export default function HomePageBookSection({ bookData }) {
   return (
     <div className="homePageBookSection">
       <div className="homePageBookSectionLeft">
@@ -24,9 +24,16 @@ export default function HomePageBookSection() {
         </div>
       </div>
       <div className="homePageBookSectionRight">
-        {myArray.map((item, index) => (
-          <Book index={index} />
-        ))}
+        {bookData.length > 0 &&
+          bookData.map((item, index) => {
+            return (
+              <Book
+                book={Object.values(item)[0]}
+                index={index}
+                keys={Object.keys(item)[0]}
+              />
+            );
+          })}
       </div>
     </div>
   );
