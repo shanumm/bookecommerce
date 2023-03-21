@@ -1,5 +1,6 @@
 import React from "react";
 import "./Styles/footer.css";
+import NDLogo from "../Images/NDLogo.png";
 
 const FooterTop = () => (
   <div className="footerTop">
@@ -46,7 +47,9 @@ export default function Footer() {
     <div className="footer">
       <FooterTop />
       <div className="footerContent">
-        <div>Logo</div>
+        <div className="footerlogoImg">
+          <img src={NDLogo} alt="" />
+        </div>
         <div className="footerLinks">
           <div>Heading</div>
           <div>

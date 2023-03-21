@@ -21,6 +21,7 @@ export default function ShoppingCart() {
       <div className="shoppingCartHeading">
         {items.length ? "Shopping Cart" : "Cart Is Empty"}
       </div>
+
       {items?.length && (
         <div className="shoppingCartContent">
           <div className="shoppingCartLeft">
@@ -30,7 +31,6 @@ export default function ShoppingCart() {
                 <div className="shoppingCartTableHeaderItem">Price</div>
                 <div className="shoppingCartTableHeaderItem">Quantity</div>
                 <div className="shoppingCartTableHeaderItem">Total</div>
-                <div className="shoppingCartTableHeaderItem"></div>
               </div>
               <div className="divider"></div>
               <div className="shoppingCartTableBody">
