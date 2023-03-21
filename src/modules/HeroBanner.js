@@ -13,7 +13,7 @@ export default function HeroBanner() {
       />
       <div className="heroText">
         <div>
-          Lorem, ipsum dolor sit ame <span>consectetur</span> adipisicing elit.
+          SUMMER SALE GET <span>30% OFF</span> ON ALL EPICS.
         </div>
         <div className="heroTextButton">
           <button>Shop Now</button>

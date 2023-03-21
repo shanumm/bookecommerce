@@ -19,6 +19,7 @@
 }
 .sectionFour > div:nth-of-type(2) > div:nth-of-type(1) {
   font-size: 3rem;
+  font-weight: 600;
   position: relative;
 }
 .sectionFour > div:nth-of-type(2) > div:nth-of-type(1)::before {
@@ -39,15 +40,17 @@
 }
 
 .sectionFour > div:nth-of-type(2) > div:nth-of-type(2) {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   width: 80%;
-  color: gray;
+  color: rgba(94, 94, 94, 0.974);
   padding: 1rem 0;
+  margin: 1rem 0rem;
 }
 .sectionFour > div:nth-of-type(2) > div:nth-of-type(3) button {
-  padding: 0.8rem 1rem;
-  border: 2px solid black;
+  padding: 0.8rem 1.5rem;
+  border: 2.4px solid black;
   outline: none;
+  font-weight: 600 !important;
   background-color: transparent;
   font-weight: 500;
 }

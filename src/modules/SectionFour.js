@@ -8,9 +8,10 @@ export default function SectionFour() {
         <img src={UrduImage} />
       </div>
       <div>
-        <div>Lorem ipsum dolor sit amet.</div>
+        <div>DIVE THE WORLDS OF BOOKS</div>
         <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. At, nam!
+          You can choose the best option for you, and it does not matter what
+          your taste is.
         </div>
         <div>
           <button>Shop Now</button>

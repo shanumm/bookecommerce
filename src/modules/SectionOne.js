@@ -20,9 +20,9 @@ const Card = ({ right }) => {
       </div>
       <div>
         <div>
-          Lorem <br /> ipsum dolor.
+          CHOOSE <br /> YOUR BOOK
         </div>
-        <div>Lorem ipsum dolor sit amet.</div>
+        <div>See our book collections</div>
         <button>SEE OFFERS</button>
       </div>
     </div>

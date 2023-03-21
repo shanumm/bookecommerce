@@ -14,5 +14,6 @@ export default function Blog() {
       <div className="divider"></div>
       <div className="blogFooter">Lorem, ipsum.</div>
     </div>
+    
   );
 }

@@ -10,8 +10,8 @@ export default function SectionTwo() {
         />
       </div>
       <div>
-        <div>Lorem, ipsum dolor.</div>
-        <div>Lorem, ipsum.</div>
+        <div>READ WITHOUT LIMITS.</div>
+        <div>SAMPLE TEXT</div>
         <div>
           <button>Shop Now</button>
         </div>

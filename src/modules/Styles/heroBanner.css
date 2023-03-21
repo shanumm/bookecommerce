@@ -17,14 +17,14 @@
 
 .heroBanner > div {
   z-index: 1;
-  font-size: 3rem;
+  font-size: 4rem;
   flex: 1;
   text-transform: uppercase;
   font-weight: 500;
 }
 .heroBanner > div span {
   color: transparent;
-  font-size: 50px;
+  font-size: 70px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
@@ -56,11 +56,11 @@
 }
 
 .heroBanner > div > div button {
-  padding: 0.8rem 1rem;
-  border: 2px solid black;
+  padding: 0.8rem 1.5rem;
+  border: 2.3px solid black;
   outline: none;
   background-color: transparent;
-  font-weight: 500;
+  font-weight: 600;
 }
 .heroBannerImageContainer img {
   border-radius: 10px;
