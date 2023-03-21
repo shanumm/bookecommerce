@@ -2,6 +2,7 @@
   display: flex;
   background: #e6f1fa;
   height: 10vh;
+  align-items: center;
   justify-content: space-around;
 }
 .footerlogoImg,
@@ -11,11 +12,14 @@
 }
 .footerTop > div {
   display: flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  justify-content: center;
   align-items: center;
 }
 .footerTop img {
-  height: 18px;
-  width: 18px;
+  height: 15px;
+  width: 15px;
   object-fit: contain;
   margin-right: 10px;
 }
@@ -35,7 +39,7 @@
   margin-bottom: 1rem;
 }
 .footerLinks > div:nth-of-type(2) > div {
-  font-size: 16px;
+  font-size: 14px;
   color: gray;
   margin-bottom: 0.2rem;
 }
@@ -63,4 +67,17 @@
     align-items: center;
     flex-direction: column;
   }
+}
+.footer_highlight {
+  font-size: 0.85rem !important;
+  color: white !important;
+}
+#footerSocialLinks img {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 1.5rem;
+  width: 1.5rem;
+  filter: invert();
+  margin-bottom: 0.3rem;
 }
