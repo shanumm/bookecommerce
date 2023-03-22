@@ -157,9 +157,4 @@
     outline: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
-} /*# sourceMappingURL=dashboard.css.map */
-@media (max-width: 1105px) {
-  .dashboardButtons > button:nth-of-type(1) {
-    padding-right: 2.7rem;
-  }
-}
+}/*# sourceMappingURL=dashboard.css.map */

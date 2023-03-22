@@ -15,6 +15,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Shipping from "./modules/Shipping";
 import { CartProvider } from "./CartContext";
 import ShoppingCart from "./modules/ShoppingCart";
+import Contact from "./modules/Contact";
 
 function App() {
   const [isUser, setIsUser] = useState(false);
@@ -49,6 +50,7 @@ function App() {
             <Route exact path="/shop" element={<Shop />} />
             <Route exact path="/cart" element={<ShoppingCart />} />
             <Route exact path="/book/:id" element={<CartProduct />} />
+            <Route exact path="/contactus" element={<Contact />} />
             <Route exact path="/dashboard" element={<Dashboard />} />
             {isUser && <Route exact path="/addBook" element={<BookForm />} />}
             <Route exact path="/shipping" element={<Shipping />} />

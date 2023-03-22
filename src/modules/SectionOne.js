@@ -1,7 +1,9 @@
 import React from "react";
 import "./Styles/sectionOne.css";
-
-const Card = ({ right }) => {
+import One from "../Images/allone.jpeg";
+import Two from "../Images/two.jpeg";
+import Three from "../Images/three.jpeg";
+const Card = ({ right, img }) => {
   return (
     <div
       className={`sectionOneCard ${
@@ -9,22 +11,15 @@ const Card = ({ right }) => {
       }`}
     >
       <div>
-        <img
-          src={
-            right
-              ? "https://cdn.pixabay.com/photo/2014/08/23/23/19/library-425730_960_720.jpg"
-              : "https://cdn.pixabay.com/photo/2014/08/17/16/33/notebook-420011_960_720.jpg"
-          }
-          alt=""
-        />
+        <img src={img} alt="" />
       </div>
-      <div>
+      {/* <div>
         <div>
           CHOOSE <br /> YOUR BOOK
         </div>
         <div>See our book collections</div>
         <button>SEE OFFERS</button>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -33,11 +28,11 @@ export default function SectionOne() {
   return (
     <div className="sectionOne">
       <div>
-        <Card right={true} />
-        <Card right={true} />
+        <Card right={true} img={One} />
+        <Card right={true} img={Two} />
       </div>
       <div>
-        <Card right={false} />
+        <Card right={false} img={Three} />
       </div>
     </div>
   );

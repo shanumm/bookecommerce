@@ -74,11 +74,13 @@ export default function Footer() {
           <div>CONTACT US</div>
           <div>
             <div className="footer_highlight">Address</div>
-            <div>J-2/16 (BASEMENT) Padam chand Marg, Daryaganj</div>
-            <div className="footer_highlight">Office - 9310406659</div>
-            <div className="footer_highlight">Mobile - 9910365713</div>
+            <div className="footer_highlightt">
+              J-2/16 (BASEMENT) Padam chand Marg, Daryaganj
+            </div>
+            <div className="footer_highlight">Office / Mobile </div>
+            <div >9310406659 / 9910365713</div>
             <div className="footer_highlight">Email</div>
-            <div>Emails - support@nldr.in outreac@nldr.in</div>
+            <div>support@nldr.in / outreac@nldr.in</div>
           </div>
         </div>
         <div className="footerLinks" id="footerSocialLinks">
@@ -92,13 +94,11 @@ export default function Footer() {
         </div>
         <div className="footerLinks">
           <div>JOIN US</div>
-          {/* <div>
-            <div>Menu</div>
-            <div>Menu</div>
-            <div>Menu</div>
-            <div>Menu</div>
-            <div>Menu</div>
-          </div> */}
+          <div className="footer_join">
+            <h4>SUBSCRIBE TO OUR NEWSLETTERS</h4>
+            <input type="email" placeholder="Email Address" />
+            <button>SUBSCRIBE!</button>
+          </div>
         </div>
       </div>
     </div>

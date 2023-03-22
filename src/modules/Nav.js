@@ -97,7 +97,9 @@ export default function Nav() {
               <li>Dashboard</li>
             </Link>
           )}
-          <li>Contact Us</li>
+          <Link to="contactus">
+            <li>Contact Us</li>
+          </Link>
         </ul>
       </div>
       <div className="navRightSide">

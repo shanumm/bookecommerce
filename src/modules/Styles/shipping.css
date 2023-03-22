@@ -90,7 +90,6 @@
   outline: none;
   padding: 12px;
   width: 40%;
-  padding-right: 2.7rem;
 }
 
 .ShippingButtons > button:nth-of-type(2) {
@@ -149,9 +148,4 @@
   .summaryBox_container_items > div > :nth-child(1) > :nth-child(2) {
     width: 80%;
   }
-} /*# sourceMappingURL=shipping.css.map */
-@media (max-width: 768px) {
-  .ShippingButtons > button:nth-of-type(1) {
-    padding-right: 2.7rem;
-  }
-}
+}/*# sourceMappingURL=shipping.css.map */

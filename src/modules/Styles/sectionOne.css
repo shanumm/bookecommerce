@@ -30,20 +30,20 @@
   height: 100%;
 }
 
-.sectionOneCardRight {
+/* .sectionOneCardRight {
   background-image: linear-gradient(
     to right,
     #f6dfd4 50%,
     rgba(255, 255, 0, 0) 60%
   );
-}
-.sectionOneCardRight:nth-of-type(1) {
+} */
+/* .sectionOneCardRight:nth-of-type(1) {
   background-image: linear-gradient(
     to right,
     rgba(255, 255, 0, 0) 45%,
     #f2f0ef 55%
   );
-}
+} */
 
 .sectionOneCardRight > div:nth-of-type(2) {
   width: fit-content;
