@@ -4,4 +4,43 @@
 }
 .shopContent > .homePageBookSectionLeft {
   border-right: 1px solid #c4c4c4;
-}/*# sourceMappingURL=shop.css.map */
+} /*# sourceMappingURL=shop.css.map */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 90%;
+  height: 3px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 20px;
+  background: black;
+  /* border-radius: 5px; */
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 5px;
+  height: 20px;
+  background: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.price_range {
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 2rem;
+  padding-bottom: 0.5rem;
+}
+.price_sliderValue {
+  font-size: 1.2em;
+  margin-top: 10px;
+}

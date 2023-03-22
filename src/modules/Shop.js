@@ -37,7 +37,14 @@ const Card = ({ right }) => {
 
 export default function Shop() {
   const [bookData, setBookData] = useState([]);
+  const [handlecheckfilter, sethandlecheckfilter] = useState("All");
+  const [sliderValue, setslidervalue] = useState(1000);
 
+  const handleBookFilter = (e) => {
+    if (e.target.checked) {
+      sethandlecheckfilter(e.target.value);
+    }
+  };
   useEffect(() => {
     getBookData();
   }, []);
@@ -62,42 +69,86 @@ export default function Shop() {
           <div>
             <div>
               <input
-                type="checkbox"
+                type="radio"
                 id="vehicle1"
                 name="vehicle1"
-                value="Bike"
+                value="All"
+                onChange={handleBookFilter}
               />
-              Best Sellers
+              All
             </div>
             <div>
               <input
-                type="checkbox"
+                type="radio"
                 id="vehicle1"
                 name="vehicle1"
-                value="Bike"
+                value="Popular"
+                onChange={handleBookFilter}
               />
-              New Arrivals
+              All In One
             </div>
             <div>
               <input
-                type="checkbox"
+                type="radio"
                 id="vehicle1"
                 name="vehicle1"
-                value="Bike"
+                value="Chaman Urdu Khushkhati"
+                onChange={handleBookFilter}
               />
-              Top This Week
+              Chaman Urdu Khushkhati
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="vehicle1"
+                name="vehicle1"
+                value="PlayWay Writing"
+                onChange={handleBookFilter}
+              />
+              PlayWay Writing
             </div>
           </div>
+          <div className="price_range">Price Range:</div>
+          <div>
+            <input
+              type="range"
+              max={1000}
+              min={50}
+              value={sliderValue}
+              step={50}
+              onChange={(e) => {
+                setslidervalue(e.target.value);
+              }}
+            />
+          </div>
+          <h1 className="price_sliderValue">{sliderValue}Rs</h1>
         </div>
         <div className="homePageBookSectionRight">
-          {bookData.length > 0 &&
-            bookData.map((item, index) => (
-              <Book
-                book={Object.values(item)[0]}
-                index={index}
-                keys={Object.keys(item)[0]}
-              />
-            ))}
+          {bookData.length > 0 && handlecheckfilter === "All"
+            ? bookData.map((item, index) => {
+              
+                if (parseInt(Object.values(item)[0].price) <=parseInt(sliderValue))
+                  return (
+                    <Book
+                      book={Object.values(item)[0]}
+                      index={index}
+                      keys={Object.keys(item)[0]}
+                    />
+                  );
+              })
+            : bookData.map((item, index) => {
+                if (Object.values(item)[0].category === handlecheckfilter)
+                  if (Object.values(item)[0].price <= sliderValue)
+                    return (
+                      <Book
+                        book={Object.values(item)[0]}
+                        index={index}
+                        keys={Object.keys(item)[0]}
+                      />
+                    );
+                  else {
+                  }
+              })}
           <Card right={true} />
           {bookData.length > 0 &&
             bookData.map((item, index) => (
