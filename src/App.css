@@ -95,3 +95,19 @@
     display: none;
   }
 }
+
+.ReactModal__Overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ReactModal__Content {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+}
+
+.ReactModal__Overlay {
+  background-color: rgb(16 15 15 / 75%);
+}

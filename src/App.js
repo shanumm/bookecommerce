@@ -16,9 +16,25 @@ import Shipping from "./modules/Shipping";
 import { CartProvider } from "./CartContext";
 import ShoppingCart from "./modules/ShoppingCart";
 import Contact from "./modules/Contact";
+import Popup from "./Modals/Popup";
 
 function App() {
   const [isUser, setIsUser] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const hasModalBeenShown = sessionStorage.getItem("hasModalBeenShown");
+    if (!hasModalBeenShown) {
+      sessionStorage.setItem("hasModalBeenShown", "true");
+      setTimeout(() => {
+        setIsOpen(true);
+      }, 2000);
+    }
+  }, []);
 
   const auth = getAuth();
   useEffect(() => {
@@ -64,6 +80,11 @@ function App() {
             <Route exact path="/shipping" element={<Shipping />} />
           </Routes>
           <Footer />
+          <Popup
+            isOpen={isOpen}
+            handleOpen={handleOpen}
+            message="Thanks for visiting our website!"
+          />
         </div>
         <FloatingContactButton />{" "}
         {/* Add the FloatingContactButton component */}

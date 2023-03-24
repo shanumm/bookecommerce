@@ -1,174 +1,61 @@
 .heroBanner {
-  height: 80vh;
-  display: flex;
-  align-items: center;
   position: relative;
+  overflow: hidden;
+  height: 80vh;
 }
 
 .heroBannerBGImage {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  /* opacity: 0.4; */
-  z-index: 0;
+  object-fit: cover;
 }
 
-.heroBanner > div {
-  z-index: 1;
-  font-size: 4rem;
-  flex: 1;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-.heroBanner > div span {
-  color: transparent;
-  font-size: 70px;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
-}
-
-.heroBanner > div > div {
-  width: 80%;
-  margin: auto;
-  text-align: left;
-}
-.heroBanner > div > div:nth-of-type(1) {
-  position: relative;
-}
-
-.heroBanner > div > div:nth-of-type(1)::before {
-  content: "";
+.splide__pagination--bottom-left {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 60%;
-  border-bottom: 2px solid black;
-}
-.heroBanner > div > div:nth-of-type(1)::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 30%;
-  border-right: 2px solid black;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
 }
 
-.heroBanner > div > div button {
-  padding: 0.8rem 1.5rem;
-  border: 2.3px solid black;
-  outline: none;
+.splide__pagination__page--black-square {
   background-color: transparent;
-  font-weight: 600;
-}
-.heroBannerImageContainer img {
-  border-radius: 10px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-.heroBannerImageContainer img:nth-of-type(1) {
-  width: 250px;
-  height: 300px;
-  object-fit: cover;
-}
-.heroBannerImageContainer img:nth-of-type(2) {
-  width: 270px;
-  height: 350px;
-  object-fit: cover;
-  transform: translate(-40px, -40px);
+  border: 1px solid black;
+  margin: 0 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 0;
 }
 
-@media (max-width: 1040px) {
-  .heroBannerBGImage {
-    opacity: 0.8;
-  }
-  .heroBanner {
-    display: flex;
-    justify-content: center;
-    flex-direction: column-reverse;
-  }
-  .heroBanner > div {
-    height: 1rem !important;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-  .heroText {
-    height: 5vh !important;
-    width: 65% !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .heroText > div {
-    font-size: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center !important;
-    align-items: center;
-    width: 100% !important;
-    word-wrap: break-word !important;
-  }
-  .heroTextButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .heroTextButton button {
-    border: 3px solid black !important;
-  }
-  .heroText > div span {
-    font-size: 1.5rem;
-    word-wrap: break-word !important;
-  }
-  .heroBanner > div > div:nth-of-type(1) {
-    position: relative;
-  }
-
-  .heroBanner > div > div:nth-of-type(1)::before {
-    display: none;
-  }
-  .heroBanner > div > div:nth-of-type(1)::after {
-    display: none;
-  }
-  .heroBannerImageContainer img {
-    border-radius: 10px;
-    padding-left: 2rem;
-    box-shadow: rgba(66, 73, 80, 0.2) 0px 8px 24px;
-  }
-  .heroBannerImageContainer img:nth-of-type(1) {
-    width: 150px;
-    height: 200px;
-    object-fit: cover;
-  }
-  .heroBannerImageContainer img:nth-of-type(2) {
-    width: 150px;
-    height: 200px;
-    object-fit: cover;
-    transform: translate(-40px, -40px);
-  }
+.splide__pagination__page--black-square.is-active {
+  background-color: black;
+}
+.splide__track,
+.splide {
+  height: 100%;
 }
 
-@media (max-width: 769px) {
-  .heroBanner {
-    height: 50vh;
-  }
-  .heroBanner > div {
-    align-items: center !important;
-  }
-  .heroBanner > div > div:nth-of-type(1) {
-    margin: 0;
-  }
-  .heroTextButton {
-    margin: 10px 0 !important;
-  }
-  .heroText {
-    justify-content: flex-start !important;
-  }
-  .heroBannerImageContainer img:nth-of-type(2) {
-    transform: translate(0);
-  }
+/* Custom arrow styles */
+.splide__arrow {
+  background-color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  opacity: 1;
+}
+
+.splide__arrow svg {
+  fill: white;
+  width: 15px;
+  height: 15px;
+}
+
+.splide__arrows {
+  position: absolute;
+  right: 10px;
+  bottom: 25px;
+}
+
+.splide__arrow--prev {
+  right: 70px;
+  left: auto;
 }

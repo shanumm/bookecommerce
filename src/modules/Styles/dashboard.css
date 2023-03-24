@@ -125,7 +125,9 @@
 }
 .myWishList > div {
   height: 100%;
+  flex: 1 1 15rem;
   width: 40%;
+  margin: 0 10px;
 }
 
 .burgerDashboardNav {
@@ -175,13 +177,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    border: 1px solid red;
+    height: auto;
     width: 50%;
+  }
+
+  .myWishList > div > * {
+    width: 100%;
+  }
+  .myWishList > div > * > img {
+    width: 100%;
+    max-width: auto;
+    min-width: auto;
   }
   .myWishList button :nth-child(1) {
     height: 50%;
     width: 100% !important;
-    border: 1px solid red;
   }
 } /*# sourceMappingURL=dashboard.css.map */

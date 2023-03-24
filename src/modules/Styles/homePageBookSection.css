@@ -94,8 +94,8 @@ input[type="checkbox"]:checked:after {
   .book {
     margin-left: 10px;
     margin-right: 10px;
-    max-width: 150px;
-    min-width: 150px;
+    /* max-width: 150px; */
+    /* min-width: 150px; */
   }
   .homePageBookSection {
     margin: 2rem 10px;

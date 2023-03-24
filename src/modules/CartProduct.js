@@ -167,9 +167,15 @@ export default function CartProduct() {
           <h4>Home/ Book/ {bookData?.name}</h4>
           <div>{bookData?.category?.toUpperCase()}</div>
           <h1>{bookData?.name}</h1>
-          <h5>SELECT COVER</h5>
-
-          <div></div>
+          <h5>Features</h5>
+          <div>
+            <ol>
+              <li>Lorem ipsum dolor sit amet. </li>
+              <li>Lorem ipsum dolor sit amet. </li>
+              <li>Lorem ipsum dolor sit amet. </li>
+              <li>Lorem ipsum dolor sit amet. </li>
+            </ol>
+          </div>
           <div>
             <h3>QUANTITY</h3>
             <h3>PRICE TOTAL</h3>
