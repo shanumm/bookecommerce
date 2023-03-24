@@ -222,14 +222,13 @@ export default function CartProduct() {
             />
           </div>
           <div></div>
-          <div>
+          <div className="cart-pro-detail">
             <div>
               <h1>ABOUT PRODUCT</h1>
               <p>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure
                 eligendi unde minima. Laudantium numquam ipsam, optio quam modi
-                aliquid nostrum iste odio maiores velit impedit nesciunt fuga
-                placeat. Officiis, at!
+                aliquid nostrum iste odio 
               </p>
             </div>
             <div>

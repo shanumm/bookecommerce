@@ -30,7 +30,6 @@
 .dashboardNav > div > div {
   padding: 10px 22px 10px 10px;
   color: #828282;
-  cursor: pointer;
 }
 
 .dashboardContentContainerHeading {
@@ -119,16 +118,8 @@
 }
 
 .myWishList {
-  width: 100%;
   flex-wrap: wrap;
   display: flex;
-  justify-content: space-around;
-}
-.myWishList > div {
-  height: 100%;
-  flex: 1 1 15rem;
-  width: 40%;
-  margin: 0 10px;
 }
 
 .burgerDashboardNav {
@@ -166,32 +157,4 @@
     outline: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
-  .myWishList {
-    width: 100%;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .myWishList > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    width: 50%;
-  }
-
-  .myWishList > div > * {
-    width: 100%;
-  }
-  .myWishList > div > * > img {
-    width: 100%;
-    max-width: auto;
-    min-width: auto;
-  }
-  .myWishList button :nth-child(1) {
-    height: 50%;
-    width: 100% !important;
-  }
-} /*# sourceMappingURL=dashboard.css.map */
+}/*# sourceMappingURL=dashboard.css.map */
