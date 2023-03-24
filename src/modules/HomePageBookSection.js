@@ -13,6 +13,10 @@ export default function HomePageBookSection({ bookData }) {
     }
   };
 
+  const handleClearFilter = () => {
+    setSelectedCheckbox("All");
+  };
+
   // useEffect(()=>{
   //   console.log(selectedCheckbox)
   // },[selectedCheckbox])
@@ -24,48 +28,50 @@ export default function HomePageBookSection({ bookData }) {
       <div className="homePageBookSectionLeft">
         <div>Sort Out:</div>
         <div>
-          <div>
+          <div className="checkbox-container">
             <input
-              type="radio"
-              id="vehicle1"
-              name="vehicle1"
-              value="All"
-              onChange={handleCheckboxChange}
-            />
-            All
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="vehicle1"
+              type="checkbox"
+              id="vehicle2"
               name="vehicle1"
               value="Popular"
+              checked={selectedCheckbox === "Popular"}
               onChange={handleCheckboxChange}
             />
-            All In One
+            <label htmlFor="vehicle2">All In One</label>
           </div>
-          <div>
+          <div className="checkbox-container">
             <input
-              type="radio"
-              id="vehicle1"
+              type="checkbox"
+              id="vehicle3"
               name="vehicle1"
+              checked={selectedCheckbox === "Chaman Urdu Khushkhati"}
               value="Chaman Urdu Khushkhati"
               onChange={handleCheckboxChange}
             />
-            Chaman Urdu Khushkhati
+            <label htmlFor="vehicle3">Chaman Urdu Khushkhati</label>
           </div>
-          <div>
+          <div className="checkbox-container">
             <input
-              type="radio"
-              id="vehicle1"
+              type="checkbox"
+              id="vehicle4"
               name="vehicle1"
+              checked={selectedCheckbox === "PlayWay Writing"}
               value="PlayWay Writing"
               onChange={handleCheckboxChange}
             />
-            PlayWay Writing
+            <label htmlFor="vehicle4">PlayWay Writing</label>
+          </div>
+          <div>
+            <button
+              className="clear-filter-button"
+              onClick={() => handleClearFilter()}
+            >
+              &#x2715; Clear Filter
+            </button>
           </div>
         </div>
       </div>
+
       <div className="homePageBookSectionRight">
         {bookData.length > 0 && selectedCheckbox === "All"
           ? bookData.map((item, index) => {

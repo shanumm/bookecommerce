@@ -60,6 +60,10 @@ export default function Shop() {
     });
   };
 
+  const handleClearFilter = () => {
+    sethandlecheckfilter("All");
+  };
+
   return (
     <div>
       <SectionTwo />
@@ -67,49 +71,50 @@ export default function Shop() {
         <div className="homePageBookSectionLeft">
           <div>Sort Out:</div>
           <div>
-            <div>
+            <div className="checkbox-container">
               <input
-                type="radio"
-                id="vehicle1"
-                name="vehicle1"
-                value="All"
-                onChange={handleBookFilter}
-              />
-              All
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="vehicle1"
+                type="checkbox"
+                id="vehicle2"
                 name="vehicle1"
                 value="Popular"
+                checked={handlecheckfilter === "Popular"}
                 onChange={handleBookFilter}
               />
-              All In One
+              <label htmlFor="vehicle2">All In One</label>
             </div>
-            <div>
+            <div className="checkbox-container">
               <input
-                type="radio"
-                id="vehicle1"
+                type="checkbox"
+                id="vehicle3"
                 name="vehicle1"
+                checked={handlecheckfilter === "Chaman Urdu Khushkhati"}
                 value="Chaman Urdu Khushkhati"
                 onChange={handleBookFilter}
               />
-              Chaman Urdu Khushkhati
+              <label htmlFor="vehicle3">Chaman Urdu Khushkhati</label>
             </div>
-            <div>
+            <div className="checkbox-container">
               <input
-                type="radio"
-                id="vehicle1"
+                type="checkbox"
+                id="vehicle4"
                 name="vehicle1"
+                checked={handlecheckfilter === "PlayWay Writing"}
                 value="PlayWay Writing"
                 onChange={handleBookFilter}
               />
-              PlayWay Writing
+              <label htmlFor="vehicle4">PlayWay Writing</label>
+            </div>
+            <div>
+              <button
+                className="clear-filter-button"
+                onClick={() => handleClearFilter()}
+              >
+                &#x2715; Clear Filter
+              </button>
             </div>
           </div>
-          <div className="price_range">Price Range:</div>
-          <div>
+          <div style={{ marginTop: "2rem" }}>
+            Price Range: {sliderValue}Rs.
             <input
               type="range"
               max={1000}
@@ -121,13 +126,14 @@ export default function Shop() {
               }}
             />
           </div>
-          <h1 className="price_sliderValue">{sliderValue}Rs</h1>
         </div>
         <div className="homePageBookSectionRight">
           {bookData.length > 0 && handlecheckfilter === "All"
             ? bookData.map((item, index) => {
-              
-                if (parseInt(Object.values(item)[0].price) <=parseInt(sliderValue))
+                if (
+                  parseInt(Object.values(item)[0].price) <=
+                  parseInt(sliderValue)
+                )
                   return (
                     <Book
                       book={Object.values(item)[0]}

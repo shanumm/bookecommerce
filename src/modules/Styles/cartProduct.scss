@@ -2,6 +2,38 @@
   min-height: 100vh;
   width: 100%;
 }
+
+.main-image-container {
+  position: relative;
+}
+
+.main-image {
+  display: block;
+  max-width: 100%;
+}
+
+.small-image-container {
+  width: 70% !important;
+  margin: auto;
+  background-color: rgba(2, 2, 2, 0.917);
+  display: flex;
+  position: absolute;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+}
+
+.small-image {
+  width: 20% !important;
+  cursor: pointer;
+  object-fit: contain;
+}
+
 .cartProductSection1 {
   height: 90vh;
   width: 80%;

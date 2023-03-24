@@ -52,6 +52,13 @@
 }
 
 @media (max-width: 769px) {
+  .footer_join {
+    width: 80% !important;
+    margin: auto !important;
+  }
+  .footerlogoImg {
+    margin-bottom: 1rem;
+  }
   .footerTop {
     min-height: 10vh;
     height: auto;
@@ -73,6 +80,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    text-align: center;
   }
 }
 .footer_highlight {
@@ -107,6 +115,7 @@
   background-color: transparent;
   border: 1px solid white;
   margin-bottom: 0.5rem;
+  padding: 0 10px;
 }
 .footer_join button {
   width: 100%;

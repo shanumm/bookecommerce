@@ -3,22 +3,34 @@ import "./Styles/cartProduct.css";
 import EnglishImage from "../Images/EnglishImage.png";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
-import { useLocation, useNavigation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import CartContext from "../CartContext";
 export default function CartProduct() {
   const { addToCart } = useContext(CartContext);
-
+  const navigation = useNavigate();
+  const [mainImage, setMainImage] = useState("");
   const [count, setCount] = useState(1);
 
   const [myprice, setmyprice] = useState(new Array(5).fill(null));
   const [bookData, setBookData] = useState({});
   const [allbookData, setAllBookData] = useState([]);
 
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("Hard");
   const location = useLocation();
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+
+  const handleRedirect = (redirect) => {
+    navigation(redirect);
+    window.scrollTo(0, 0);
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -71,19 +83,84 @@ export default function CartProduct() {
     }
   };
 
+  useEffect(() => {
+    if (bookData?.url) {
+      setMainImage(bookData.url);
+    }
+  }, [bookData]);
+
+  const changeMainImage = (imageUrl) => {
+    setMainImage(imageUrl);
+  };
+
   return (
     <div className="CartProduct">
+      <div className="fixed-section">
+        {allbookData.length &&
+          allbookData
+            .filter(
+              (item) => Object.values(item)[0].category != bookData?.category
+            )
+            .map(
+              (item, index) =>
+                index < 2 && (
+                  <div
+                    onClick={() =>
+                      handleRedirect(`/book/${Object.keys(item)[0]}`)
+                    }
+                    className="book-card"
+                  >
+                    <img loading="lazy" src={Object.values(item)[0].url} />
+                    <div>{Object.values(item)[0].name}</div>
+                    <div>{Object.values(item)[0].price} RS.</div>
+                  </div>
+                )
+            )}
+      </div>
       <div className="cartProductSection1">
         <div>
-          <div>
-            <img src={bookData?.url} />
+          <div className="main-image-container">
+            <img loading="lazy" className="main-image" src={mainImage} />
+            <div className="small-image-container">
+              <img
+                loading="lazy"
+                className="small-image"
+                onClick={() => changeMainImage(bookData?.url1)}
+                src={bookData?.url1}
+              />
+              <img
+                loading="lazy"
+                className="small-image"
+                onClick={() => changeMainImage(bookData?.url2)}
+                src={bookData?.url2}
+              />
+              <img
+                loading="lazy"
+                className="small-image"
+                onClick={() => changeMainImage(bookData?.url3)}
+                src={bookData?.url3}
+              />
+            </div>
           </div>
+
           <div>
             <h4>SHARE: </h4>
-            <img src="https://cdn-icons-png.flaticon.com/128/3128/3128208.png" />
-            <img src="https://cdn-icons-png.flaticon.com/128/3128/3128212.png" />
-            <img src="https://cdn-icons-png.flaticon.com/128/733/733622.png" />
-            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111491.png" />
+            <img
+              loading="lazy"
+              src="https://cdn-icons-png.flaticon.com/128/3128/3128208.png"
+            />
+            <img
+              loading="lazy"
+              src="https://cdn-icons-png.flaticon.com/128/3128/3128212.png"
+            />
+            <img
+              loading="lazy"
+              src="https://cdn-icons-png.flaticon.com/128/733/733622.png"
+            />
+            <img
+              loading="lazy"
+              src="https://cdn-icons-png.flaticon.com/128/2111/2111491.png"
+            />
           </div>
         </div>
         <div>
@@ -91,48 +168,8 @@ export default function CartProduct() {
           <div>{bookData?.category?.toUpperCase()}</div>
           <h1>{bookData?.name}</h1>
           <h5>SELECT COVER</h5>
-          {/* <div>
-            <div>
-              <input
-                type="checkbox"
-                id="cartproduct1"
-                name="cartproduct1"
-                value="cartproduct1"
-              />
-              HARD
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="cartproduct2"
-                name="cartproduct2"
-                value="cartproduct2"
-              />
-              SOFT
-            </div>
-          </div> */}
-          <div>
-            <label>
-              <input
-                onChange={handleRadioChange}
-                type="radio"
-                name="options"
-                checked={selectedValue === "Hard"}
-                value="Hard"
-              />
-              Hard
-            </label>
-            <label>
-              <input
-                onChange={handleRadioChange}
-                type="radio"
-                name="options"
-                checked={selectedValue === "Soft"}
-                value="Soft"
-              />
-              Soft
-            </label>
-          </div>
+
+          <div></div>
           <div>
             <h3>QUANTITY</h3>
             <h3>PRICE TOTAL</h3>
@@ -173,7 +210,10 @@ export default function CartProduct() {
         <div>
           <div>
             <h1>Details</h1>
-            <img src="https://img.icons8.com/ios/1x/minus-math.png" />
+            <img
+              loading="lazy"
+              src="https://img.icons8.com/ios/1x/minus-math.png"
+            />
           </div>
           <div></div>
           <div>
@@ -192,11 +232,14 @@ export default function CartProduct() {
         </div>
         <div>
           <h1>Other information</h1>
-          <img src="https://img.icons8.com/ios/1x/plus-math.png" />
+          <img
+            loading="lazy"
+            src="https://img.icons8.com/ios/1x/plus-math.png"
+          />
         </div>
         {/* <div>
           <h1>Another tab</h1>
-          <img src="https://img.icons8.com/ios/1x/plus-math.png" />
+          <img loading="lazy" src="https://img.icons8.com/ios/1x/plus-math.png" />
         </div> */}
       </div>
       <div className="cartProductSection3">
@@ -207,19 +250,25 @@ export default function CartProduct() {
       <div className="cartProductSection4">
         {" "}
         {allbookData.length &&
-          allbookData.map(
-            (item, index) =>
-              index < 5 && (
-                <div className="cartProductSection4-image">
+          allbookData.map((item, index) => {
+            return (
+              index < 6 && (
+                <div
+                  onClick={() =>
+                    handleRedirect(`/book/${Object.keys(item)[0]}`)
+                  }
+                  className="cartProductSection4-image"
+                >
                   <div>
-                    <img src={Object.values(item)[0].url} />
+                    <img loading="lazy" src={Object.values(item)[0].url} />
                   </div>
                   <div>{Object.values(item)[0].category}</div>
                   <div>{Object.values(item)[0].name}</div>
                   <div>{Object.values(item)[0].price} RS.</div>
                 </div>
               )
-          )}
+            );
+          })}
       </div>
     </div>
   );

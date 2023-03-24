@@ -51,7 +51,7 @@ export default function Footer() {
           <img src={NDLogo} alt="" />
         </div>
         <div className="footerLinks">
-          <div>FEATURES</div>
+          <div>Categories</div>
           <div>
             <div>All in One (KINDERGARTEN)</div>
             <div>Chaman Urdu Khushkhati</div>
@@ -80,7 +80,7 @@ export default function Footer() {
             <div className="footer_highlight">Office / Mobile </div>
             <div >9310406659 / 9910365713</div>
             <div className="footer_highlight">Email</div>
-            <div>support@nldr.in / outreac@nldr.in</div>
+            <div>support@nldr.in / outreach@nldr.in</div>
           </div>
         </div>
         <div className="footerLinks" id="footerSocialLinks">

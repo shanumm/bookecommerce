@@ -1,6 +1,64 @@
 .CartProduct {
   min-height: 100vh;
   width: 100%;
+  position: relative;
+}
+
+.fixed-section {
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  padding: 3rem 20px 20px 20px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-card img {
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 10px;
+}
+
+.book-card div {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.main-image-container {
+  position: relative;
+}
+
+.main-image {
+  display: block;
+  max-width: 100%;
+}
+
+.small-image-container {
+  width: 70% !important;
+  margin: auto;
+  background-color: rgba(2, 2, 2, 0.917);
+  display: flex;
+  position: absolute;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  bottom: 5%;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+}
+
+.small-image {
+  width: 20% !important;
+  cursor: pointer;
+  -o-object-fit: contain;
+  object-fit: contain;
 }
 
 .cartProductSection1 {
@@ -26,11 +84,11 @@
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 .cartProductSection1 > :nth-child(1) > :nth-child(2) {
   height: 10%;
-  width: 20%;
+  width: 50%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -54,7 +112,7 @@
 .cartProductSection1 > :nth-child(2) > :nth-child(2) {
   height: 1.7rem;
   border-radius: 3px;
-  width: 12%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +143,8 @@
 }
 .cartProductSection1 > :nth-child(2) > :nth-child(6) {
   height: 1rem;
-  width: 34%;
+  width: 40%;
+
   display: flex;
   justify-content: space-between;
   font-size: 0.6rem;
@@ -166,7 +225,7 @@
   height: 1.5rem;
   width: 1.2rem;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .cartProductSection2 > :nth-child(1) > :nth-child(2) {
   height: 1.2px;
@@ -201,7 +260,8 @@
   font-weight: 100;
   font-size: 0.8rem;
 }
-.cartProductSection2 > :nth-child(2), .cartProductSection2 > :nth-child(3) {
+.cartProductSection2 > :nth-child(2),
+.cartProductSection2 > :nth-child(3) {
   height: 8vh;
   width: 100%;
   margin-top: 1rem;
@@ -212,11 +272,12 @@
   align-items: center;
   font-size: 0.6rem;
 }
-.cartProductSection2 > :nth-child(2) img, .cartProductSection2 > :nth-child(3) img {
+.cartProductSection2 > :nth-child(2) img,
+.cartProductSection2 > :nth-child(3) img {
   height: 1.5rem;
   width: 1.2rem;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .cartProductSection3 {
@@ -335,4 +396,4 @@
   .navRightSide > div:nth-of-type(3) > div {
     margin: 0 10px !important;
   }
-}/*# sourceMappingURL=cartProduct.css.map */
+} /*# sourceMappingURL=cartProduct.css.map */

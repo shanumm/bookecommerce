@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import Blogs from "./modules/Blogs";
 import CartProduct from "./modules/CartProduct";
 import Footer from "./modules/Footer";
@@ -37,6 +37,14 @@ function App() {
     });
   }, []);
 
+  function FloatingContactButton() {
+    return (
+      <Link to="/contactus" className="floating-contact-button">
+        <div>Contact</div>
+      </Link>
+    );
+  }
+
   return (
     <CartProvider>
       <Router>
@@ -57,6 +65,8 @@ function App() {
           </Routes>
           <Footer />
         </div>
+        <FloatingContactButton />{" "}
+        {/* Add the FloatingContactButton component */}
       </Router>
     </CartProvider>
   );

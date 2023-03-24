@@ -40,7 +40,7 @@
 .contactform-left > :nth-child(1) {
   font-size: 2.5rem;
   height: 12%;
-  color: #443fd9;
+  color: #111111;
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -90,7 +90,7 @@
   outline: none;
   width: 50%;
   padding: 8px 12px;
-  background-color: #443fd9;
+  background-color: #111111;
   color: white;
   border-radius: 10px;
 }

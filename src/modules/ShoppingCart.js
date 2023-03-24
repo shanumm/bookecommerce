@@ -64,7 +64,7 @@ export default function ShoppingCart() {
               <div className="divider"></div>
               <div className="shoppingCartTableFooter">
                 <Link to="/shop">
-                  <button className="shoppingCartButton">
+                  <button className="shoppingCartButton1">
                     Continue Shopping
                   </button>
                 </Link>

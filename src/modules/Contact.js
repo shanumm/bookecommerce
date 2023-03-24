@@ -61,7 +61,7 @@ export default function Contact() {
                   alt=""
                 />
               </div>
-              <div>support@nldr.in / outreac@nldr.in</div>
+              <div>support@nldr.in / outreach@nldr.in</div>
             </div>
           </div>
         </div>

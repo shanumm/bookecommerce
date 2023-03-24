@@ -75,7 +75,13 @@
   display: flex;
   justify-content: space-between;
 }
-
+.shoppingCartButton1 {
+  background: #000000;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 12px;
+}
 .shoppingCartTableFooter > button {
   background: #000000;
   color: white;

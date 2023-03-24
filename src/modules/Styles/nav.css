@@ -10,6 +10,11 @@
   position: relative;
 }
 
+.activeNavItem {
+  padding: 0 5px 5px 5px;
+  border-bottom: 2px solid #eb5757 !important;
+} 
+
 .burgerNav {
   display: none;
 }
@@ -49,11 +54,13 @@
   align-items: center;
 }
 .navLinks ul li {
+  padding: 0 5px 5px 5px;
   margin: 0 10px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   cursor: pointer;
+  border-bottom: 2px solid black;
 }
 
 .navLinks ul li:last-child img {
@@ -83,8 +90,23 @@
   display: none;
 }
 @media (max-width: 769px) {
+  .logoImg {
+    width: 100%;
+  }
+  .logoImg img {
+    margin: auto;
+  }
   .navLinks {
     display: none;
+  }
+  .navRightSide {
+    display: none;
+  }
+  .burgerIcons {
+    display: flex;
+  }
+  .burgerIcons > div {
+    margin-right: 10px;
   }
   .burgerNav {
     transition: all 0.3s ease-in-out;
