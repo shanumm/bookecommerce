@@ -246,6 +246,12 @@
   width: 50%;
   font-size: 0.45rem;
 }
+.cartProductSection2 > :nth-child(1) > :nth-child(3) > :nth-child(1) p {
+  margin-top: 2rem;
+  height: 3rem;
+  width: 90%;
+  font-size: 0.75rem;
+}
 .cartProductSection2 > :nth-child(1) > :nth-child(3) > :nth-child(2) {
   width: 50%;
 }
@@ -341,16 +347,19 @@
   width: 100%;
   font-size: 0.8rem;
   color: #bdbdbd;
+  padding-left: 2.2rem;
 }
 .cartProductSection4-image > :nth-child(3) {
   height: 9%;
   padding-top: 0.2rem;
   font-size: 0.7rem;
   font-weight: 500;
+  padding-left: 2.2rem;
 }
 .cartProductSection4-image > :nth-child(4) {
   font-size: 1.1rem;
   font-weight: 600;
+  padding-left: 2.2rem;
 }
 
 @media (max-width: 769px) {

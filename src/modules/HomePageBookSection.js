@@ -66,7 +66,7 @@ export default function HomePageBookSection({ bookData }) {
               className="clear-filter-button"
               onClick={() => handleClearFilter()}
             >
-              &#x2715; Clear Filter
+              &#x2715; Clear
             </button>
           </div>
         </div>
