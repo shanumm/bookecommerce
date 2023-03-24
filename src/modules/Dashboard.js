@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputField from "../components/InputField";
 import Book from "../components/Book";
 import "./Styles/dashboard.css";
@@ -7,15 +7,17 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import CartContext from "../CartContext";
 
 export default function Dashboard({ route }) {
+  const { wishList, addToCart, removeFromWishList } = useContext(CartContext);
+
   const location = useLocation();
   const [activeNav, setActiveNav] = useState(1);
   const [isUser, setIsUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [userData, setUserData] = useState(null);
   const [newValue, setNewValue] = useState({});
-
 
   const navigation = useNavigate();
 
@@ -77,6 +79,14 @@ export default function Dashboard({ route }) {
       const userD = doc(db, "users", userEmail);
       setDoc(userD, newValue, { merge: true });
     }
+  };
+
+  const handleAddToCart = (book) => {
+    addToCart({ ...book, quantity: 1, selectedValue: "Hard" });
+  };
+
+  const handleRemoveFromCart = (book) => {
+    removeFromWishList({ ...book });
   };
 
   return isUser ? (
@@ -269,20 +279,40 @@ export default function Dashboard({ route }) {
         )}
         {activeNav == 5 && (
           <div className="myWishList">
-            <div>
-              <Book index={0} />
-              <div style={{ width: "100%" }} className="dashboardButtons">
-                <button style={{ width: "60%" }}>Add To Cart</button>
-                <button style={{ marginLeft: "4px" }}>Remove</button>
-              </div>
-            </div>
-            <div>
+            {wishList?.length
+              ? wishList.map((list) => {
+                  console.log(list);
+                  return (
+                    <div>
+                      <Book index={0} book={list?.book} />
+                      <div
+                        style={{ width: "100%" }}
+                        className="myWishListButtons dashboardButtons"
+                      >
+                        <button
+                          style={{ width: "60%" }}
+                          onClick={() => handleAddToCart(list?.book)}
+                        >
+                          Add To Cart
+                        </button>
+                        <button
+                          onClick={() => handleRemoveFromCart(list?.book)}
+                          style={{ marginLeft: "4px" }}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })
+              : null}
+            {/* <div>
               <Book index={1} />
               <div style={{ width: "100%" }} className="dashboardButtons">
                 <button style={{ width: "60%" }}>Add To Cart</button>
                 <button style={{ marginLeft: "4px" }}>Remove</button>
               </div>
-            </div>
+            </div> */}
           </div>
         )}
       </div>

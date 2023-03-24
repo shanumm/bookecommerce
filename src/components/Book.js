@@ -13,10 +13,13 @@ import CartContext from "../CartContext";
 import { Link } from "react-router-dom";
 export default function Book({ index, book, keys }) {
   const { addToCart } = useContext(CartContext);
-
   const handleAddToCart = () => {
     addToCart(book?.name, book?.price, book?.url);
   };
+
+  useEffect(() => {
+    console.log(book);
+  }, [book]);
 
   return (
     <Link to={`/book/${keys}`}>

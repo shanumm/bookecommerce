@@ -6,7 +6,7 @@ import "./Styles/shoppingCart.css";
 
 export default function ShoppingCart() {
   //   const navigation = useNavigation();
-  const { items } = useContext(CartContext);
+  const { items, clearCart } = useContext(CartContext);
 
   useEffect(() => {
     console.log(items);
@@ -16,13 +16,17 @@ export default function ShoppingCart() {
     // navigation(redirect);
   };
 
+  const handleClearCart = () => {
+    clearCart();
+  };
+
   return (
     <div className="shoppingCart">
       <div className="shoppingCartHeading">
         {items.length ? "Shopping Cart" : "Cart Is Empty"}
       </div>
 
-      {items?.length && (
+      {items?.length ? (
         <div className="shoppingCartContent">
           <div className="shoppingCartLeft">
             <div className="shoppingCartTable">
@@ -68,7 +72,12 @@ export default function ShoppingCart() {
                     Continue Shopping
                   </button>
                 </Link>
-                <button className="shoppingCartButton">Clear Cart</button>
+                <button
+                  onClick={handleClearCart}
+                  className="shoppingCartButton"
+                >
+                  Clear Cart
+                </button>
               </div>
             </div>
           </div>
@@ -78,7 +87,7 @@ export default function ShoppingCart() {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

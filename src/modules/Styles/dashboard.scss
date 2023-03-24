@@ -93,6 +93,10 @@
   }
 }
 
+.myWishListButtons {
+  padding: 10px 5px !important;
+}
+
 .dashboardButtons {
   padding: 0 56px 20px 56px;
   width: 50%;
@@ -116,6 +120,9 @@
 .myWishList {
   flex-wrap: wrap;
   display: flex;
+  & > div {
+    max-width: 300px;
+  }
 }
 .burgerDashboardNav {
   display: none;

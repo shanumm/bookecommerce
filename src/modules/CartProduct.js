@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import CartContext from "../CartContext";
 export default function CartProduct() {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, addToWishList } = useContext(CartContext);
   const navigation = useNavigate();
   const [mainImage, setMainImage] = useState("");
   const [count, setCount] = useState(1);
@@ -50,6 +50,13 @@ export default function CartProduct() {
 
   const handleAddToCart = () => {
     addToCart({ ...bookData, quantity: count, selectedValue: selectedValue });
+  };
+
+  const handleAddToWishList = () => {
+    addToWishList({
+      ...bookData,
+      selectedValue: selectedValue,
+    });
   };
 
   useEffect(() => {
@@ -170,10 +177,11 @@ export default function CartProduct() {
           <h5>Features</h5>
           <div>
             <ol>
-              <li>Lorem ipsum dolor sit amet. </li>
-              <li>Lorem ipsum dolor sit amet. </li>
-              <li>Lorem ipsum dolor sit amet. </li>
-              <li>Lorem ipsum dolor sit amet. </li>
+              <li>
+                {bookData?.description
+                  ? bookData?.description
+                  : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi unde minima. Laudantium numquam ipsam, optio quam modi aliquid nostrum iste odio maiores velit impedit nesciunt fuga placeat. Officiis, at!"}{" "}
+              </li>
             </ol>
           </div>
           <div>
@@ -196,7 +204,7 @@ export default function CartProduct() {
           </div>
           <div>
             <button onClick={handleAddToCart}>ADD TO BAG</button>
-            <button>♡ SAVE</button>
+            <button onClick={handleAddToWishList}>♡ SAVE</button>
           </div>
           <div>
             <h5>
@@ -224,12 +232,11 @@ export default function CartProduct() {
           <div></div>
           <div>
             <div>
-              <h1>ABOUT PRODUCT</h1>
+              <h1>ABOUT BOOK</h1>
               <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure
-                eligendi unde minima. Laudantium numquam ipsam, optio quam modi
-                aliquid nostrum iste odio maiores velit impedit nesciunt fuga
-                placeat. Officiis, at!
+                {bookData?.description
+                  ? bookData?.description
+                  : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi unde minima. Laudantium numquam ipsam, optio quam modi aliquid nostrum iste odio maiores velit impedit nesciunt fuga placeat. Officiis, at!"}
               </p>
             </div>
             <div>
