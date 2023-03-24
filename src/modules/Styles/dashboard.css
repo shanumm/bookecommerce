@@ -118,8 +118,14 @@
 }
 
 .myWishList {
+  width: 100%;
   flex-wrap: wrap;
   display: flex;
+  justify-content: space-around;
+}
+.myWishList > div {
+  height: 100%;
+  width: 40%;
 }
 
 .burgerDashboardNav {
@@ -157,4 +163,14 @@
     outline: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
-}/*# sourceMappingURL=dashboard.css.map */
+  .myWishList {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+  }
+  .myWishList > div {
+    height: 100%;
+    width: 40%;
+  }
+} /*# sourceMappingURL=dashboard.css.map */

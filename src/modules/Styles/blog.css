@@ -2,7 +2,6 @@
   width: 300px;
   height: 300px;
   background-color: white;
-  
 }
 
 .blog > div {
@@ -11,7 +10,8 @@
 
 .blog .heading {
   color: gray;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 600;
 }
 .blog .subHeading {
   font-size: 18px;
@@ -21,7 +21,7 @@
 
 .divider {
   margin: 0 1rem;
-  border-bottom: 2px solid black;
+  border-bottom: 3.5px solid black;
 }
 .blogFooter {
   color: gray;

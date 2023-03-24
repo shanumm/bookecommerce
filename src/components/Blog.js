@@ -3,7 +3,7 @@ import "../modules/Styles/blog.css";
 export default function Blog() {
   return (
     <div className="blog">
-      <div className="heading">Lorem.</div>
+      <div className="heading">Lorem</div>
       <div className="subHeading">Lorem ipsum dolor sit.</div>
       <div className="content">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum
@@ -14,6 +14,5 @@ export default function Blog() {
       <div className="divider"></div>
       <div className="blogFooter">Lorem, ipsum.</div>
     </div>
-    
   );
 }
