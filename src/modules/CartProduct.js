@@ -230,7 +230,7 @@ export default function CartProduct() {
             />
           </div>
           <div></div>
-          <div>
+          <div className="cart-pro-detail">
             <div>
               <h1>ABOUT BOOK</h1>
               <p>
