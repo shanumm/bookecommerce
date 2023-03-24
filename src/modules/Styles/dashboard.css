@@ -167,10 +167,21 @@
     width: 100%;
     flex-wrap: wrap;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
   }
   .myWishList > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    width: 40%;
+    border: 1px solid red;
+    width: 50%;
+  }
+  .myWishList button :nth-child(1) {
+    height: 50%;
+    width: 100% !important;
+    border: 1px solid red;
   }
 } /*# sourceMappingURL=dashboard.css.map */
