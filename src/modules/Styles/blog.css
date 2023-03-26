@@ -1,6 +1,7 @@
 .blog {
   width: 300px;
   height: 300px;
+  cursor: pointer;
   background-color: white;
 }
 
@@ -26,4 +27,30 @@
 .blogFooter {
   color: gray;
   font-size: 12px;
+}
+
+.clipped-heading {
+  padding-bottom: 0 !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.clipped-subheading {
+  padding-bottom: 0 !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clipped-text {
+  padding-bottom: 0 !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -17,6 +17,8 @@ import { CartProvider } from "./CartContext";
 import ShoppingCart from "./modules/ShoppingCart";
 import Contact from "./modules/Contact";
 import Popup from "./Modals/Popup";
+import BlogsPage from "./modules/BlogsPage";
+import IndividualBlog from "./components/IndividualBlog";
 
 function App() {
   const [isUser, setIsUser] = useState(false);
@@ -74,6 +76,8 @@ function App() {
             <Route exact path="/shop" element={<Shop />} />
             <Route exact path="/cart" element={<ShoppingCart />} />
             <Route exact path="/book/:id" element={<CartProduct />} />
+            <Route exact path="/posts/:id" element={<IndividualBlog />} />
+            <Route exact path="/blogs" element={<BlogsPage />} />
             <Route exact path="/contactus" element={<Contact />} />
             <Route exact path="/dashboard" element={<Dashboard />} />
             {isUser && <Route exact path="/addBook" element={<BookForm />} />}

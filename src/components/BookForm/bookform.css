@@ -46,6 +46,32 @@
 .forminput[type="submit"]:active {
   background-color: #0044aa;
 }
+
+/* Add these styles to the end of the file */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.tab-button {
+  background-color: #f4f4f4;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 0 10px;
+}
+
+.tab-button:hover {
+  background-color: #ddd;
+}
+
+.tab-button.active {
+  background-color: #ddd;
+}
+
 @media (max-width: 769px) {
   .form-container {
     padding: 1.5rem;
