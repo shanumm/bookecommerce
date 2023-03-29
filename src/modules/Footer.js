@@ -78,7 +78,7 @@ export default function Footer() {
               J-2/16 (BASEMENT) Padam chand Marg, Daryaganj
             </div>
             <div className="footer_highlight">Office / Mobile </div>
-            <div >9310406659 / 9910365713</div>
+            <div>9310406659 / 9910365713</div>
             <div className="footer_highlight">Email</div>
             <div>support@nldr.in / outreach@nldr.in</div>
           </div>
@@ -86,10 +86,46 @@ export default function Footer() {
         <div className="footerLinks" id="footerSocialLinks">
           <div>FOLLOW US</div>
           <div>
-            <img src="https://cdn-icons-png.flaticon.com/128/3128/3128208.png" />
-            <img src="https://cdn-icons-png.flaticon.com/128/3128/3128212.png" />
-            <img src="https://cdn-icons-png.flaticon.com/128/733/733622.png" />
-            <img src="https://cdn-icons-png.flaticon.com/128/2111/2111491.png" />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textTransform: "uppercase",
+              }}
+            >
+              <img
+                style={{ marginRight: "10px" }}
+                src="https://cdn-icons-png.flaticon.com/512/747/747374.png"
+              />
+              Facebook
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textTransform: "uppercase",
+              }}
+            >
+              <img
+                style={{ marginRight: "10px" }}
+                src="https://cdn-icons-png.flaticon.com/512/25/25347.png"
+              />
+              Twitter
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textTransform: "uppercase",
+              }}
+            >
+              <img
+                style={{ marginRight: "10px" }}
+                src="https://cdn-icons-png.flaticon.com/512/1400/1400829.png"
+              />
+              Instagram
+            </div>
           </div>
         </div>
         <div className="footerLinks">

@@ -5,6 +5,11 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
   const [wishList, setWishList] = useState([]);
+  const [allBooksData, setAllBooksData] = useState([]);
+
+  const getBooks = (books) => {
+    setAllBooksData(books);
+  };
 
   const addToCart = (book) => {
     setItems((prevState) => [...prevState, { book }]);
@@ -15,9 +20,16 @@ export function CartProvider({ children }) {
   };
 
   const removeFromWishList = (book) => {
-    console.log(book, "book");
-    console.log(items, "items");
     setWishList((prevState) =>
+      prevState.filter((item) => {
+        return item.book.name !== book.name;
+      })
+    );
+  };
+
+  const removeFromCart = (book) => {
+    console.log(book);
+    setItems((prevState) =>
       prevState.filter((item) => {
         return item.book.name !== book.name;
       })
@@ -27,19 +39,18 @@ export function CartProvider({ children }) {
     setItems([]);
   };
 
-  useEffect(() => {
-    console.log(items, ">>>>>");
-  }, [items]);
-
   return (
     <CartContext.Provider
       value={{
         items,
         wishList,
+        allBooksData,
         addToCart,
         addToWishList,
         removeFromWishList,
         clearCart,
+        getBooks,
+        removeFromCart,
       }}
     >
       {children}

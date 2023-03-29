@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { Link, useNavigation } from "react-router-dom";
 import CartContext from "../CartContext";
+import Discount from "../components/Discount";
 import Subtotal from "../components/Subtotal";
 import "./Styles/shoppingCart.css";
 
 export default function ShoppingCart() {
   //   const navigation = useNavigation();
-  const { items, clearCart } = useContext(CartContext);
+  const { items, clearCart, removeFromCart, addToWishList } =
+    useContext(CartContext);
 
   useEffect(() => {
     console.log(items);
@@ -18,6 +20,17 @@ export default function ShoppingCart() {
 
   const handleClearCart = () => {
     clearCart();
+  };
+
+  const handleRemoveFromCart = (book) => {
+    removeFromCart(book);
+  };
+
+  const handleAddToWishList = (bookData) => {
+    addToWishList({
+      ...bookData,
+      selectedValue: "Hard",
+    });
   };
 
   return (
@@ -61,7 +74,39 @@ export default function ShoppingCart() {
                       {parseInt(item?.book?.price) *
                         parseInt(item?.book?.quantity)}
                     </div>
-                    <div className="shoppingCartTableRowItem"></div>
+                    <div style={{ display: "flex" }}>
+                      <div
+                        style={{
+                          background: "#E6F1FA",
+                          cursor: "pointer",
+                          height: "20px",
+                          width: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginRight: "5px",
+                        }}
+                        className="shoppingCartTableRowItem"
+                        onClick={() => handleAddToWishList(item.book)}
+                      >
+                        ♡
+                      </div>
+                      <div
+                        style={{
+                          background: "#E6F1FA",
+                          cursor: "pointer",
+                          height: "20px",
+                          width: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                        className="shoppingCartTableRowItem"
+                        onClick={() => handleRemoveFromCart(item.book)}
+                      >
+                        &times;
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -82,6 +127,9 @@ export default function ShoppingCart() {
             </div>
           </div>
           <div className="shoppingCartRight">
+            <div className="Shippingsummary subTotalSummary">
+              <Discount />
+            </div>
             <div className="Shippingsummary subTotalSummary">
               <Subtotal handleRedirect={handleRedirect} items={items} />
             </div>

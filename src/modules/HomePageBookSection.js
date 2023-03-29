@@ -1,10 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Book from "../components/Book";
 import { db } from "../firebase";
 import "./Styles/homePageBookSection.css";
 export default function HomePageBookSection({ bookData }) {
   const [selectedCheckbox, setSelectedCheckbox] = useState("All");
+  const [categories, setCategories] = useState([]);
 
   const handleCheckboxChange = (event) => {
     console.log(event);
@@ -17,50 +18,42 @@ export default function HomePageBookSection({ bookData }) {
     setSelectedCheckbox("All");
   };
 
-  // useEffect(()=>{
-  //   console.log(selectedCheckbox)
-  // },[selectedCheckbox])
+  useEffect(() => {
+    getCategories();
+  }, []);
+  const getCategories = async () => {
+    const docRef = doc(db, "categories", "category");
+    const docSnap = await getDoc(docRef);
 
-  // console.log(outputData);
+    if (docSnap.exists()) {
+      setCategories(docSnap.data().categories);
+    } else {
+    }
+  };
+
   console.log(bookData);
   return (
     <div className="homePageBookSection">
       <div className="homePageBookSectionLeft">
         <div>Sort Out:</div>
         <div>
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              id="vehicle2"
-              name="vehicle1"
-              value="Popular"
-              checked={selectedCheckbox === "Popular"}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor="vehicle2">All In One</label>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              id="vehicle3"
-              name="vehicle1"
-              checked={selectedCheckbox === "Chaman Urdu Khushkhati"}
-              value="Chaman Urdu Khushkhati"
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor="vehicle3">Chaman Urdu Khushkhati</label>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkbox"
-              id="vehicle4"
-              name="vehicle1"
-              checked={selectedCheckbox === "PlayWay Writing"}
-              value="PlayWay Writing"
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor="vehicle4">PlayWay Writing</label>
-          </div>
+          {categories.length > 0 &&
+            categories.map((c, i) => (
+              <div className="checkbox-container">
+                <input
+                  type="checkbox"
+                  id={`vehicle${i + 2}`}
+                  name="vehicle1"
+                  value={c}
+                  checked={selectedCheckbox === c}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor={`vehicle${i + 2}`}>
+                  {c === "Popular" ? "All In One" : c}
+                </label>
+              </div>
+            ))}
+
           <div>
             <button
               className="clear-filter-button"

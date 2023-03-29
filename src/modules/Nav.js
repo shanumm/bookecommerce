@@ -5,7 +5,7 @@ import NDLogo from "../Images/NDLogo.png";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import CartContext from "../CartContext";
 export default function Nav() {
-  const { items } = useContext(CartContext);
+  const { items, wishList } = useContext(CartContext);
   const [isUser, setIsUser] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [activeBurger, setActiveBurger] = useState(false);
@@ -199,6 +199,7 @@ export default function Nav() {
         </div>
         <div>
           <div
+            style={{ display: "flex", alignItems: "baseline" }}
             onClick={() =>
               navigation("/dashboard", {
                 state: {
@@ -211,19 +212,20 @@ export default function Nav() {
               src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
               alt=""
             />
+            <div>{wishList?.length}</div>
           </div>
           <Link
             style={{ marginLeft: "5px" }}
             to={items.length > 0 ? "/cart" : ""}
           >
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <img
                 style={{ margin: "0 5px" }}
                 src="https://cdn-icons-png.flaticon.com/512/1656/1656850.png"
                 alt=""
               />
               <div>
-                <div stlye={{ fontWeight: "300" }}>Shopping Cart</div>
+                <div style={{ fontWeight: "300" }}>Shopping Cart</div>
                 <div style={{ fontWeight: "700" }}>{totalPrice}Rs.</div>
               </div>
             </div>

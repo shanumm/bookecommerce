@@ -1,6 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CartContext from "../CartContext";
 import { db } from "../firebase";
 import Blogs from "./Blogs";
 import HeroBanner from "./HeroBanner";
@@ -11,6 +12,8 @@ import SectionThree from "./SectionThree";
 import SectionTwo from "./SectionTwo";
 
 export default function Landing() {
+  const { getBooks } = useContext(CartContext);
+
   const [bookData, setBookData] = useState([]);
 
   useEffect(() => {
@@ -24,6 +27,7 @@ export default function Landing() {
       books.push({ [doc.id]: doc.data() });
       if (books.length === querySnapshot.size) {
         setBookData(books);
+        getBooks(books);
       }
     });
   };

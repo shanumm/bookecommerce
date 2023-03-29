@@ -1,7 +1,7 @@
 .book {
   min-width: 220px;
-  margin: 1rem 0rem;
-  height: 300px;
+  margin: 1rem 1rem;
+  height: 450px;
 }
 
 .book > div:nth-of-type(1) {
@@ -19,13 +19,11 @@
 
 .book > div:nth-of-type(2) {
   font-size: 14px;
-  margin: 10px 0;
-  font-weight: 600;
+  margin: 2px 0;
+  font-weight: 300;
   color: gray;
-  padding-left: 1.8rem;
 }
 .book > div:nth-of-type(3) {
   font-size: 22px;
   font-weight: 500;
-  padding-left: 1.8rem;
 }

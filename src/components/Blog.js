@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../modules/Styles/blog.css";
 export default function Blog({ blog, keyValue }) {
   const [addedDate, setAddedDate] = useState(null);
@@ -13,7 +14,7 @@ export default function Blog({ blog, keyValue }) {
   }, []);
 
   return (
-    <a href={`/posts/${keyValue}`}>
+    <Link to={`/posts/${keyValue}`}>
       <div className="blog">
         <div className="heading clipped-heading">{blog?.title}</div>
         <div className="subHeading clipped-subheading">{blog.subtitle}</div>
@@ -21,6 +22,6 @@ export default function Blog({ blog, keyValue }) {
         <div className="divider"></div>
         <div className="blogFooter">{addedDate && addedDate}</div>
       </div>
-    </a>
+    </Link>
   );
 }

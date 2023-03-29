@@ -279,33 +279,37 @@ export default function Dashboard({ route }) {
         )}
         {activeNav == 5 && (
           <div className="myWishList">
-            {wishList?.length
-              ? wishList.map((list) => {
-                  console.log(list);
-                  return (
-                    <div>
-                      <Book index={0} book={list?.book} />
-                      <div
-                        style={{ width: "100%" }}
-                        className="myWishListButtons dashboardButtons"
+            {wishList?.length ? (
+              wishList.map((list) => {
+                console.log(list);
+                return (
+                  <div>
+                    <Book index={0} book={list?.book} />
+                    <div
+                      style={{ width: "100%" }}
+                      className="myWishListButtons dashboardButtons"
+                    >
+                      <button
+                        style={{ width: "60%" }}
+                        onClick={() => handleAddToCart(list?.book)}
                       >
-                        <button
-                          style={{ width: "60%" }}
-                          onClick={() => handleAddToCart(list?.book)}
-                        >
-                          Add To Cart
-                        </button>
-                        <button
-                          onClick={() => handleRemoveFromCart(list?.book)}
-                          style={{ marginLeft: "4px" }}
-                        >
-                          Remove
-                        </button>
-                      </div>
+                        Add To Cart
+                      </button>
+                      <button
+                        onClick={() => handleRemoveFromCart(list?.book)}
+                        style={{ marginLeft: "4px" }}
+                      >
+                        Remove
+                      </button>
                     </div>
-                  );
-                })
-              : null}
+                  </div>
+                );
+              })
+            ) : (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                There is nothing to show here
+              </div>
+            )}
             {/* <div>
               <Book index={1} />
               <div style={{ width: "100%" }} className="dashboardButtons">

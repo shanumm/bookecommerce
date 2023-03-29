@@ -4,33 +4,22 @@ import "./Styles/shop.css";
 
 import SectionTwo from "./SectionTwo";
 import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import Banner2 from "../Banners/2.png";
+import { useLocation } from "react-router-dom";
 
 const Card = ({ right }) => {
   return (
     <div
-      style={{ flex: "auto", width: "-webkit-fill-available" }}
+      style={{ flex: "auto", width: "-webkit-fill-available", height: "40vh" }}
       className={`sectionOneCard ${
         right ? "sectionOneCardRight" : "sectionOneCardLeft"
       }`}
     >
       <div>
-        <img
-          src={
-            right
-              ? "https://cdn.pixabay.com/photo/2014/08/23/23/19/library-425730_960_720.jpg"
-              : "https://cdn.pixabay.com/photo/2014/08/17/16/33/notebook-420011_960_720.jpg"
-          }
-          alt=""
-        />
+        <img src={Banner2} alt="" />
       </div>
-      <div>
-        <div>
-          Lorem <br /> ipsum dolor.
-        </div>
-        <div>Lorem ipsum dolor sit amet.</div>
-        <button>SEE OFFERS</button>
-      </div>
+      <div></div>
     </div>
   );
 };
@@ -39,6 +28,8 @@ export default function Shop() {
   const [bookData, setBookData] = useState([]);
   const [handlecheckfilter, sethandlecheckfilter] = useState("All");
   const [sliderValue, setslidervalue] = useState(1000);
+  const location = useLocation();
+  const [categories, setCategories] = useState([]);
 
   const handleBookFilter = (e) => {
     if (e.target.checked) {
@@ -46,6 +37,9 @@ export default function Shop() {
     }
   };
   useEffect(() => {
+    if (location?.state?.filter) {
+      sethandlecheckfilter(location.state.filter);
+    }
     getBookData();
   }, []);
 
@@ -64,6 +58,19 @@ export default function Shop() {
     sethandlecheckfilter("All");
   };
 
+  useEffect(() => {
+    getCategories();
+  }, []);
+  const getCategories = async () => {
+    const docRef = doc(db, "categories", "category");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setCategories(docSnap.data().categories);
+    } else {
+    }
+  };
+
   return (
     <div>
       <SectionTwo />
@@ -71,39 +78,22 @@ export default function Shop() {
         <div className="homePageBookSectionLeft">
           <div>Sort Out:</div>
           <div>
-            <div className="checkbox-container">
-              <input
-                type="checkbox"
-                id="vehicle2"
-                name="vehicle1"
-                value="Popular"
-                checked={handlecheckfilter === "Popular"}
-                onChange={handleBookFilter}
-              />
-              <label htmlFor="vehicle2">All In One</label>
-            </div>
-            <div className="checkbox-container">
-              <input
-                type="checkbox"
-                id="vehicle3"
-                name="vehicle1"
-                checked={handlecheckfilter === "Chaman Urdu Khushkhati"}
-                value="Chaman Urdu Khushkhati"
-                onChange={handleBookFilter}
-              />
-              <label htmlFor="vehicle3">Chaman Urdu Khushkhati</label>
-            </div>
-            <div className="checkbox-container">
-              <input
-                type="checkbox"
-                id="vehicle4"
-                name="vehicle1"
-                checked={handlecheckfilter === "PlayWay Writing"}
-                value="PlayWay Writing"
-                onChange={handleBookFilter}
-              />
-              <label htmlFor="vehicle4">PlayWay Writing</label>
-            </div>
+            {categories.length > 0 &&
+              categories.map((c, i) => (
+                <div className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    id={`vehicle${i + 2}`}
+                    name="vehicle1"
+                    value={c}
+                    checked={handlecheckfilter === c}
+                    onChange={handleBookFilter}
+                  />
+                  <label htmlFor={`vehicle${i + 2}`}>
+                    {c === "Popular" ? "All In One" : c}
+                  </label>
+                </div>
+              ))}
             <div>
               <button
                 className="clear-filter-button"

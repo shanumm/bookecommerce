@@ -6,7 +6,7 @@ const styles = {
     width: "100%",
     padding: "10px",
     backgroundColor: "#f2f2f2",
-    borderTop: "1px solid #ccc",
+    border: "2px solid #c4c4c4",
   },
   subTotalItem: {
     display: "flex",

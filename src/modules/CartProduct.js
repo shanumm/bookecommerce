@@ -110,7 +110,7 @@ export default function CartProduct() {
             )
             .map(
               (item, index) =>
-                index < 2 && (
+                index < 3 && (
                   <div
                     onClick={() =>
                       handleRedirect(`/book/${Object.keys(item)[0]}`)
@@ -135,18 +135,22 @@ export default function CartProduct() {
                 onClick={() => changeMainImage(bookData?.url1)}
                 src={bookData?.url1}
               />
-              <img
-                loading="lazy"
-                className="small-image"
-                onClick={() => changeMainImage(bookData?.url2)}
-                src={bookData?.url2}
-              />
-              <img
-                loading="lazy"
-                className="small-image"
-                onClick={() => changeMainImage(bookData?.url3)}
-                src={bookData?.url3}
-              />
+              {bookData?.url2 && (
+                <img
+                  loading="lazy"
+                  className="small-image"
+                  onClick={() => changeMainImage(bookData?.url2)}
+                  src={bookData?.url2}
+                />
+              )}
+              {bookData?.url3 && (
+                <img
+                  loading="lazy"
+                  className="small-image"
+                  onClick={() => changeMainImage(bookData?.url3)}
+                  src={bookData?.url3}
+                />
+              )}
             </div>
           </div>
 
@@ -177,31 +181,72 @@ export default function CartProduct() {
           <h5>Features</h5>
           <div>
             <ol>
-              <li>
-                {bookData?.description
-                  ? bookData?.description
-                  : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure eligendi unde minima. Laudantium numquam ipsam, optio quam modi aliquid nostrum iste odio maiores velit impedit nesciunt fuga placeat. Officiis, at!"}{" "}
-              </li>
+              {bookData?.features ? (
+                <ul>
+                  {bookData.features.split(";").map((feature, index) => (
+                    <li style={{ listStyle: "disc" }} key={index}>
+                      {feature.trim()}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+                  eligendi unde minima. Laudantium numquam ipsam, optio quam
+                  modi aliquid nostrum iste odio maiores velit impedit nesciunt
+                  fuga placeat. Officiis, at!
+                </p>
+              )}
             </ol>
           </div>
-          <div>
-            <h3>QUANTITY</h3>
-            <h3>PRICE TOTAL</h3>
+          <div className="priceQuantityHeadingContainer">
+            <h3 style={{ flex: "1" }}>QUANTITY</h3>
+            <h3 style={{ flex: "1" }}></h3>
+            <h3 style={{ flex: "1" }}>PRICE TOTAL</h3>
           </div>
-          <div>
-            <div>
+          <div className="priceQuantityValueContainer">
+            {/* Quantity */}
+            <div
+              style={{ flex: "1", display: "flex", justifyContent: "center" }}
+            >
               <h3 style={{ cursor: "pointer" }} onClick={handleDecrement}>
                 -
               </h3>
-              <h2>{count}</h2>
+              <h2 style={{ margin: "0 10px" }}>{count}</h2>
               <h3 style={{ cursor: "pointer" }} onClick={handleIncrement}>
                 +
               </h3>
             </div>
-            <div>
-              <h6>{bookData?.price} RS.</h6>
+            {/* Discount */}
+            <div
+              style={{ flex: "1", display: "flex", justifyContent: "center" }}
+            >
+              <span style={{ color: "red", fontWeight: 300 }}>-50%</span>
+            </div>
+            {/* Selling Price */}
+            <div style={{ flex: "1", textAlign: "left", fontSize: "2rem" }}>
+              <div style={{ color: "green", fontWeight: 500 }}>
+                <span
+                  style={{
+                    fontSize: "0.4em",
+                    verticalAlign: "top",
+                    position: "relative",
+                    top: "-0.1em",
+                  }}
+                >
+                  ₹
+                </span>
+                <span style={{ fontSize: "1em" }}>{bookData?.price}</span>
+              </div>
+              <div style={{ fontSize: "12px", color: "gray" }}>
+                M.R.P{" "}
+                <span style={{ textDecoration: "line-through" }}>
+                  {bookData?.price * 2}₹
+                </span>
+              </div>
             </div>
           </div>
+
           <div>
             <button onClick={handleAddToCart}>ADD TO BAG</button>
             <button onClick={handleAddToWishList}>♡ SAVE</button>

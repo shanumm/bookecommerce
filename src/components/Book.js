@@ -22,7 +22,7 @@ export default function Book({ index, book, keys }) {
   }, [book]);
 
   return (
-    <Link to={`/book/${keys}`}>
+    <Link style={{ flex: " 0 0 10rem" }} to={`/book/${keys}`}>
       <div
         style={{ cursor: "pointer" }}
         // onClick={handleAddToCart}

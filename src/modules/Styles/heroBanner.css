@@ -2,6 +2,7 @@
   position: relative;
   overflow: hidden;
   height: 80vh;
+  margin: 1rem;
 }
 
 .heroBannerBGImage {

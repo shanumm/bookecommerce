@@ -30,6 +30,7 @@
 }
 
 .footerContent {
+  font-family: "Abel";
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -59,7 +60,6 @@
 @media (max-width: 769px) {
   .footer_join {
     width: 80% !important;
-    margin: auto !important;
   }
   .footerlogoImg {
     margin-bottom: 1rem;
@@ -134,7 +134,7 @@
   background-color: transparent;
   border: 1px solid white;
   margin-bottom: 0.5rem;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .footer_join input::placeholder {

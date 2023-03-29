@@ -12,12 +12,12 @@
 .blog .heading {
   color: gray;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .blog .subHeading {
   font-size: 18px;
   padding: 0.5rem 1rem;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .divider {
@@ -32,6 +32,7 @@
 .clipped-heading {
   padding-bottom: 0 !important;
   display: -webkit-box;
+
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -47,6 +48,8 @@
 }
 
 .clipped-text {
+  font-family: "Abel";
+  letter-spacing: 1%;
   padding-bottom: 0 !important;
   display: -webkit-box;
   -webkit-line-clamp: 7;

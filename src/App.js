@@ -19,6 +19,7 @@ import Contact from "./modules/Contact";
 import Popup from "./Modals/Popup";
 import BlogsPage from "./modules/BlogsPage";
 import IndividualBlog from "./components/IndividualBlog";
+import ScrollToTop from "./Helpers/ScrollToTop";
 
 function App() {
   const [isUser, setIsUser] = useState(false);
@@ -34,7 +35,7 @@ function App() {
       sessionStorage.setItem("hasModalBeenShown", "true");
       setTimeout(() => {
         setIsOpen(true);
-      }, 2000);
+      }, 5000);
     }
   }, []);
 
@@ -66,6 +67,7 @@ function App() {
   return (
     <CartProvider>
       <Router>
+        <ScrollToTop />
         <div className="App">
           <Nav />
           <Routes>

@@ -1,21 +1,11 @@
 import React from "react";
 import "./Styles/sectionFour.css";
-import UrduImage from "../Images/UrduImage.png";
+import Banner2 from "../Banners/2.png";
 export default function SectionFour() {
   return (
     <div className="sectionFour">
       <div>
-        <img src={UrduImage} />
-      </div>
-      <div>
-        <div>DIVE THE WORLDS OF BOOKS</div>
-        <div>
-          You can choose the best option for you, and it does not matter what
-          your taste is.
-        </div>
-        <div>
-          <button>Shop Now</button>
-        </div>
+        <img src={Banner2} />
       </div>
     </div>
   );
