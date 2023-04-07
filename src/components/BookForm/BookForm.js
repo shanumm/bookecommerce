@@ -4,12 +4,16 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import "./bookform.css";
 import {
   addDoc,
+  arrayRemove,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
+  query,
   setDoc,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import BlogForm from "../BlogForm/BlogForm";
@@ -29,6 +33,12 @@ function BookForm() {
     description: "",
     price: "",
   });
+  const [loading, setLoading] = useState(false);
+
+  const [discountPercentage, setDiscountPercentage] = useState("");
+  const [coupons, setCoupons] = useState([
+    { name: "", price: "", categories: [] },
+  ]);
 
   const { allBooksData } = useContext(CartContext);
 
@@ -84,6 +94,7 @@ function BookForm() {
   };
 
   const addData = async (urls) => {
+    setLoading(true);
     try {
       await addDoc(collection(db, "books"), {
         name: name,
@@ -92,15 +103,45 @@ function BookForm() {
         ...urls,
         features,
         category: category,
+        discountPercentage: discountPercentage,
       });
+
       window.alert("Book Added");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
+    setLoading(true);
   };
 
   function handleCategoryChange(e) {
     setCategory(e.target.value);
+  }
+  async function handleCategoryRemoval(category) {
+    setLoading(true);
+    const categoryDocRef = doc(db, "categories", "category");
+
+    try {
+      await updateDoc(categoryDocRef, {
+        categories: arrayRemove(category),
+      });
+      console.log("Category removed successfully");
+    } catch (error) {
+      console.error("Error removing category: ", error);
+    }
+
+    const booksCollectionRef = collection(db, "books");
+    const q = query(booksCollectionRef, where("category", "==", category));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach(async (doc) => {
+      try {
+        await deleteDoc(doc.ref);
+        console.log("Book removed successfully");
+      } catch (error) {
+        console.error("Error removing book: ", error);
+      }
+    });
+    setLoading(false);
   }
 
   function handleNewCategory(e) {
@@ -112,6 +153,7 @@ function BookForm() {
   }
 
   const addCategoryToFirebase = async (data) => {
+    setLoading(true)
     try {
       await setDoc(doc(db, "categories", "category"), {
         categories: data,
@@ -121,6 +163,49 @@ function BookForm() {
     } catch (e) {
       console.error("Error adding document: ", e);
     }
+    setLoading(false)
+  };
+  const addCoupon = async (e) => {
+    e.preventDefault();
+    setLoading(true)
+    console.log(coupons, ">>><<");
+    try {
+      await setDoc(doc(db, "coupon", "coupon"), {
+        coupons: coupons,
+      });
+      getCategories();
+      window.alert("Coupon Added");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+    setLoading(false)
+  };
+
+  useEffect(() => {
+    fetchCoupons();
+  }, []);
+  const fetchCoupons = async () => {
+    try {
+      const docRef = doc(db, "coupon", "coupon");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.coupons) {
+          setCoupons(data.coupons);
+        }
+      } else {
+        console.log("No such document!");
+      }
+    } catch (error) {
+      console.error("Error fetching coupons: ", error);
+    }
+  };
+
+  const removeCouponInput = (couponIndex) => {
+    setCoupons((prevCoupons) =>
+      prevCoupons.filter((_, index) => index !== couponIndex)
+    );
   };
 
   const handleBookIdChange = (e) => {
@@ -135,6 +220,7 @@ function BookForm() {
 
   const handleBookUpdate = async (e) => {
     e.preventDefault();
+    setLoading(true)
     const urls = await uploadImagesAndGetUrls();
     if (urls) {
       const definedUrls = Object.fromEntries(
@@ -147,6 +233,40 @@ function BookForm() {
       });
       window.alert("Book Updated");
     }
+    setLoading(false)
+  };
+
+  const addCouponInput = () => {
+    setCoupons([...coupons, { name: "", price: "", categories: [] }]);
+  };
+
+  const handleCheckboxChange = (event, couponIndex, category) => {
+    const { checked } = event.target;
+
+    setCoupons((prevCoupons) =>
+      prevCoupons.map((coupon, index) => {
+        if (index !== couponIndex) return coupon;
+
+        if (checked) {
+          return { ...coupon, categories: [...coupon.categories, category] };
+        } else {
+          return {
+            ...coupon,
+            categories: coupon.categories.filter((cat) => cat !== category),
+          };
+        }
+      })
+    );
+  };
+
+  const handleCouponChange = (value, couponIndex, field) => {
+    setCoupons((prevCoupons) =>
+      prevCoupons.map((coupon, index) => {
+        if (index !== couponIndex) return coupon;
+
+        return { ...coupon, [field]: value };
+      })
+    );
   };
 
   return (
@@ -175,6 +295,26 @@ function BookForm() {
           }}
         >
           Update Book
+        </button>
+        <button
+          className={`tab-button ${
+            activeTab === "updateCoupon" ? "active" : ""
+          }`}
+          onClick={() => {
+            setActiveTab("updateCoupon");
+          }}
+        >
+          Update Coupon
+        </button>
+        <button
+          className={`tab-button ${
+            activeTab === "deleteCategory" ? "active" : ""
+          }`}
+          onClick={() => {
+            setActiveTab("deleteCategory");
+          }}
+        >
+          Delete Category
         </button>
       </div>
 
@@ -225,6 +365,15 @@ function BookForm() {
                 />
               </label>
               <label className="formlabel">
+                Discount Percentage:
+                <input
+                  className="forminput"
+                  type="number"
+                  value={discountPercentage}
+                  onChange={(e) => setDiscountPercentage(e.target.value)}
+                />
+              </label>
+              <label className="formlabel">
                 Description:
                 <textarea
                   className="forminput"
@@ -240,6 +389,7 @@ function BookForm() {
                   onChange={(e) => setFeatures(e.target.value)}
                 />
               </label>
+
               <label className="formlabel">
                 Image 1:
                 <input
@@ -335,6 +485,20 @@ function BookForm() {
                 />
               </label>
               <label className="formlabel">
+                Discount Percentage:
+                <input
+                  className="forminput"
+                  type="number"
+                  value={bookToUpdate?.discountPercentage}
+                  onChange={(e) =>
+                    setBookToUpdate({
+                      ...bookToUpdate,
+                      discountPercentage: e.target.value,
+                    })
+                  }
+                />
+              </label>
+              <label className="formlabel">
                 Description:
                 <textarea
                   className="forminput"
@@ -348,7 +512,7 @@ function BookForm() {
                 />
               </label>
               <label className="formlabel">
-              Features: (seperate by ";")
+                Features: (seperate by ";")
                 <textarea
                   className="forminput"
                   value={bookToUpdate.features}
@@ -360,6 +524,7 @@ function BookForm() {
                   }
                 />
               </label>
+
               <label className="formlabel">
                 Image 1:
                 <input
@@ -432,6 +597,129 @@ function BookForm() {
                 Update
               </button>
             </form>
+          </div>
+        )}
+        {activeTab === "updateCoupon" && (
+          <div className="form-container">
+            <div>Add Coupon</div>
+            <form onSubmit={addCoupon}>
+              {coupons.map((coupon, index) => (
+                <div key={index}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <label style={{ marginBottom: "20px" }}>
+                      Categories To Show Coupon In
+                    </label>
+                    {categories.map((category) => (
+                      <div style={{ display: "flex", marginTop: "10px" }}>
+                        <label style={{ width: "200px" }}>{category}</label>
+                        <input
+                          type="checkbox"
+                          className="selectedCheckboxes"
+                          value={category}
+                          checked={coupon.categories.includes(category)}
+                          onChange={(e) =>
+                            handleCheckboxChange(e, index, category)
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <label className="formlabel">
+                      Coupon Name:
+                      <input
+                        className="forminput"
+                        type="text"
+                        value={coupon.name}
+                        onChange={(e) =>
+                          handleCouponChange(e.target.value, index, "name")
+                        }
+                      />
+                    </label>
+                    <label className="formlabel">
+                      Coupon Price Percentage
+                      <input
+                        className="forminput"
+                        type="number"
+                        value={coupon.price}
+                        onChange={(e) =>
+                          handleCouponChange(e.target.value, index, "price")
+                        }
+                      />
+                    </label>
+                    <label className="formlabel">
+                      Custom Line:
+                      <input
+                        className="forminput"
+                        type="text"
+                        value={coupon.customLine}
+                        onChange={(e) =>
+                          handleCouponChange(
+                            e.target.value,
+                            index,
+                            "customLine"
+                          )
+                        }
+                      />
+                    </label>
+                  </div>
+                  <button
+                    className="forminput"
+                    type="button"
+                    onClick={() => removeCouponInput(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                className="forminput"
+                type="button"
+                onClick={addCouponInput}
+              >
+                Add More
+              </button>
+              <button className="forminput" type="submit">
+                Update
+              </button>
+            </form>
+          </div>
+        )}
+        {activeTab === "deleteCategory" && (
+          <div style={{ height: "40vh" }} className="form-container">
+            <div>Delete Category</div>
+            <select
+              className="forminput"
+              value={category}
+              onChange={handleCategoryChange}
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <p>
+              Deleting a category will remove all the books from that category
+            </p>
+            <button
+              style={{ marginTop: "20px" }}
+              onClick={() => {
+                if (category.length === 0) window.alert("Select a category");
+                else {
+                  handleCategoryRemoval(category);
+                }
+              }}
+              className="forminput"
+            >
+              Delete
+            </button>
           </div>
         )}
       </div>

@@ -78,7 +78,7 @@ export default function Nav() {
 
           <li onClick={() => handleRedirect("/blogs")}>Blog</li>
           <li>Sale</li>
-          {userEmail === "test2@gmail.com" && (
+          {userEmail === "test3@gmail.com" && (
             <li onClick={() => handleRedirect("/addbook")}>Add Book</li>
           )}
           {isUser && (
@@ -155,7 +155,7 @@ export default function Nav() {
           <li className={activeNavItem === "/sale" ? "activeNavItem" : ""}>
             Sale
           </li>
-          {userEmail === "test2@gmail.com" && (
+          {userEmail === "test3@gmail.com" && (
             <div onClick={() => handleRedirect("/addbook")}>
               <li
                 className={activeNavItem === "/addbook" ? "activeNavItem" : ""}

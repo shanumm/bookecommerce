@@ -165,7 +165,7 @@ export default function Dashboard({ route }) {
               <div className="dashboardCardContainer">
                 <div className="dashboardCard">
                   <div>Default Billing Address</div>
-                  {userData?.country.length === 0 ? (
+                  {userData?.country?.length === 0 ? (
                     <div>You have not set a default billing address.</div>
                   ) : (
                     <div>
@@ -187,7 +187,7 @@ export default function Dashboard({ route }) {
                 </div>
                 <div style={{ marginLeft: "10px" }} className="dashboardCard">
                   <div>Default Shipping Address</div>
-                  {userData?.country.length === 0 ? (
+                  {userData?.country?.length === 0 ? (
                     <div>You have not set a default billing address.</div>
                   ) : (
                     <div>
@@ -229,8 +229,10 @@ export default function Dashboard({ route }) {
                 <button
                   onClick={handleUpdateAccountInfo}
                   className={
-                    newValue?.first?.length === 0 ||
-                    newValue?.last?.length === 0
+                    (newValue &&
+                      newValue?.first &&
+                      newValue?.first?.length === 0) ||
+                    (newValue && newValue?.last && newValue?.last?.length === 0)
                       ? "disabled"
                       : ""
                   }

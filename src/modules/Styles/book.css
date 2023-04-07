@@ -19,11 +19,11 @@
 
 .book > div:nth-of-type(2) {
   font-size: 14px;
-  margin: 2px 0;
   font-weight: 300;
   color: gray;
 }
 .book > div:nth-of-type(3) {
   font-size: 22px;
   font-weight: 500;
+  line-height: 22px;
 }

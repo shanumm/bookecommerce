@@ -17,16 +17,20 @@ export default function SignIn() {
   const [loader, setLoader] = useState(false);
 
   const handleSignIn = () => {
+    setLoader(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         navigation("/");
+        setLoader(false);
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        window.alert(errorMessage);
+        setLoader(false);
       });
   };
 

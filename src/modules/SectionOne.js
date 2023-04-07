@@ -35,14 +35,16 @@ export default function SectionOne() {
     <button
       onClick={() => handleRedirect(value)}
       style={{
+        fontFamily: "Oswald",
         position: "absolute",
         bottom: "10%",
-        left: left ? "85%" : "5%",
-        background: "#000000",
-        color: "white",
-        border: "none",
+        width: "130px",
+        left: left ? "73%" : "5%",
+        background: "transparent",
+        border: "2px solid #000000",
+        color: "black",
         outline: "none",
-        padding: "12px",
+        padding: "8px 24px",
       }}
     >
       Shop Now

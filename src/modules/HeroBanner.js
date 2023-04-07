@@ -4,7 +4,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import "./Styles/heroBanner.css";
 import Two from "../MainCaraousel/1 (1).png";
 import One from "../MainCaraousel/2 (1).png";
-import Three from "../MainCaraousel/3.png";
+import Three from "../MainCaraousel/final.png";
 import { useNavigate } from "react-router-dom";
 
 export default function HeroBanner() {
@@ -13,17 +13,19 @@ export default function HeroBanner() {
     navigation("/shop", { state: { filter: value } });
   };
 
-  const OverlayButton = () => (
+  const OverlayButton = ({ last, first }) => (
     <button
       style={{
+        fontFamily: "Oswald",
         position: "absolute",
-        bottom: "20%",
-        left: "5%",
-        background: "#000000",
-        color: "white",
-        border: "none",
+        fontWeight: "500",
+        bottom: first ? "30%" : "15%",
+        left: last ? "4%" : "5%",
+        background: "transparent",
+        border: "2px solid #000000",
+        color: "black",
         outline: "none",
-        padding: "12px",
+        padding: "8px 50px",
       }}
     >
       Shop Now
@@ -46,20 +48,20 @@ export default function HeroBanner() {
           },
         }}
       >
+        <SplideSlide onClick={() => handleRedirect("PlayWay Writing")}>
+          <OverlayButton last={true} />
+          <img className="heroBannerBGImage" src={Three} />
+        </SplideSlide>
         <SplideSlide
           style={{ position: "relative" }}
           onClick={() => handleRedirect("Popular")}
         >
-          <OverlayButton />
+          <OverlayButton first={true} />
           <img className="heroBannerBGImage" src={Two} />
         </SplideSlide>
         <SplideSlide onClick={() => handleRedirect("Chaman Urdu Khushkhati")}>
           <OverlayButton />
           <img className="heroBannerBGImage" src={One} />
-        </SplideSlide>
-        <SplideSlide onClick={() => handleRedirect("PlayWay Writing")}>
-          <OverlayButton />
-          <img className="heroBannerBGImage" src={Three} />
         </SplideSlide>
       </Splide>
 

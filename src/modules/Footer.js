@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Styles/footer.css";
 import NDLogo from "../Images/NDLogo.png";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const FooterTop = () => (
   <div className="footerTop">
@@ -43,6 +45,21 @@ const FooterTop = () => (
 );
 
 export default function Footer() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+  const getCategories = async () => {
+    const docRef = doc(db, "categories", "category");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setCategories(docSnap.data().categories);
+    } else {
+    }
+  };
+
   return (
     <div className="footer">
       <FooterTop />
@@ -53,25 +70,34 @@ export default function Footer() {
         <div className="footerLinks">
           <div>Categories</div>
           <div>
-            <div>All in One (KINDERGARTEN)</div>
-            <div>Chaman Urdu Khushkhati</div>
-            <div>Play Writing</div>
-            <div>Play Reading</div>
+            {categories.length > 0 &&
+              categories.map((c, i) => {
+                if (i < 8) {
+                  return (
+                    <div className="checkbox-container">
+                      <div>{c === "Popular" ? "All In One" : c}</div>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+
             {/* <div>Menu</div> */}
           </div>
         </div>
         <div className="footerLinks">
-          <div>MENU</div>
+          <div>Menu</div>
           <div>
             <div>About Us</div>
             <div>Contact Us</div>
-            <div>MY aacount</div>
-            <div>blog</div>
-            <div>order history</div>
+            <div>My Account</div>
+            <div>Blog</div>
+            <div>Order History</div>
           </div>
         </div>
         <div className="footerLinks">
-          <div>CONTACT US</div>
+          <div>Contact Us</div>
           <div>
             <div className="footer_highlight">Address</div>
             <div className="footer_highlightt">
@@ -84,7 +110,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footerLinks" id="footerSocialLinks">
-          <div>FOLLOW US</div>
+          <div>Follow Us</div>
           <div>
             <div
               style={{
@@ -129,7 +155,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footerLinks">
-          <div>JOIN US</div>
+          <div>Join Us</div>
           <div className="footer_join">
             <h4>SUBSCRIBE TO OUR NEWSLETTERS</h4>
             <input type="email" placeholder="Email Address" />

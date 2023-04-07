@@ -58,6 +58,9 @@
 }
 
 @media (max-width: 769px) {
+  .footer .checkbox-container > div {
+    margin: auto;
+  }
   .footer_join {
     width: 80% !important;
   }
